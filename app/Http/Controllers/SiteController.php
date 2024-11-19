@@ -113,27 +113,17 @@ class SiteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Site $site)
+    public function destroy(Request $request, Site $site)
     {
         try {
-            Site::destroy($site->id);
-            return redirect()->route('sites.index')->with('success', 'Site supprimé avec succès!');
+            if (isset($request->name_delete) && $request->name_delete == $site->name) {
+                Site::destroy($site->id);
+                return redirect()->route('sites.index')->with('success', 'Site supprimé avec succès!');
+            } else {
+                return back()->with('error', "Site n'a pas été supprimé, veuillez saisir le nom du site à supprimer");
+            }
         } catch (\Throwable $th) {
             return redirect()->route('sites.index')->with('error', $th->getMessage());
         }
     }
-
-    // public function search(Request $request)
-    // {
-    //     try {
-    //         // dd($request->search);
-    //         $search = $request->search ?? "";
-    //         $sites = Site::where('name', 'like', '%' . $search . '%')->orderBy('name', 'asc')->paginate(10);
-    //         // $sites = Site::orderBy('name', 'asc')->paginate(10);
-    //         $data = ['sites' => $sites, 'search' => $search];
-    //         return view('configs.sites.index', $data);
-    //     } catch (\Throwable $th) {
-    //         return redirect()->route('sites.index')->with('error', $th->getMessage());
-    //     }
-    // }
 }

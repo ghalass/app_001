@@ -71,21 +71,34 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
-                                    <i class="bi bi-x-lg"></i> Annuler
-                                </button>
-
-
-
-                                <form action="{{ route('sites.destroy', $site) }}" method="POST">
+                            <div class=" ">
+                                <form action="{{ route('sites.destroy', $site) }}" method="POST" class="">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash3"></i> Supprimer
-                                    </button>
-                                </form>
+                                    <div class="d-flex align-items-center justify-content-between mx-3">
 
+                                        <div class="">
+                                            <label for="floatingName_delete">Récopiez le site à supprimer</label>
+                                            <input type="text"
+                                                class="form-control @error('name_delete') is-invalid @enderror"
+                                                name="name_delete" id="floatingName_delete" placeholder="" value="">
+                                        </div>
+
+
+                                        <div class="d-flex align-items-center justify-content-center gap-1">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                data-bs-dismiss="modal">
+                                                <i class="bi bi-x-lg"></i> Annuler
+                                            </button>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash3"></i>
+                                                Supprimer
+                                            </button>
+                                        </div>
+
+
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

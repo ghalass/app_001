@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-<title>Types parc</title>
+<title>Sites</title>
 
-<?php $page = 'typeparcs'; ?>
+<?php $page = 'sites'; ?>
 
 @section('content')
-    @include('configs.header')
+    @include('configs._shared.header')
 
     <div class="mt-2">
         <div class="text-center">
-            <h1 class="">Détails d'un typeparc</h1>
+            <h1 class="">Détails d'un site</h1>
         </div>
 
         <div class="d-flex gap-1 justify-content-center">
