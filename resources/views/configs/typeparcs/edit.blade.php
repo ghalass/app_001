@@ -17,19 +17,19 @@
                     <form action="{{ route('typeparcs.update', $typeparc->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="mb-1">
-                            <label for="name" class="form-label">Type de parc</label>
+                        <div class="form-floating mb-1">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" aria-describedby="nameHelp" value="{{ old('name', $typeparc->name) }}">
+                                name="name" placeholder="" value="{{ old('name', $typeparc->name) }}">
+                            <label for="name">Type de parc</label>
                             @error('name')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-1">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="3"
+                        <div class="form-floating mb-1">
+                            <textarea name="description" id="description" style="height: 100px" placeholder=""
                                 class="form-control @error('description') is-invalid @enderror">{{ old('description', $typeparc->description) }}</textarea>
+                            <label for="description">Description</label>
                             @error('description')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror

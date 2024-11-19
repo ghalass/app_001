@@ -28,6 +28,12 @@ $items = [
         'active' => $page == 'parcs' ? ' active' : '',
         'icon' => 'bi bi-truck',
     ],
+    (object) [
+        'title' => 'Engins',
+        'link' => 'engins.index',
+        'active' => $page == 'engins' ? ' active' : '',
+        'icon' => 'bi bi-truck-flatbed',
+    ],
 ];
 ?>
 

@@ -15,21 +15,21 @@
         <div class="d-flex gap-1 justify-content-center">
             <div class="card" style="width: 30rem;">
                 <div class="card-body">
-                    <form action="{{ route('sites.store') }}" method="POST">
+                    <form action="{{ route('sites.store') }}" method="POST" class="form-floating">
                         @csrf
-                        <div class="mb-1">
-                            <label for="name" class="form-label">Site</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" aria-describedby="nameHelp" value={{ old('name') }}>
+                        <div class="form-floating mb-1">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                id="floatingName" placeholder="" value={{ old('name') }}>
+                            <label for="floatingName">Site</label>
                             @error('name')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-1">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="3"
+                        <div class="form-floating mb-1">
+                            <textarea name="description" id="description" style="height: 100px" placeholder=""
                                 class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                            <label for="description">Description</label>
                             @error('description')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror

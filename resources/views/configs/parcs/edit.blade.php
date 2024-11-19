@@ -17,17 +17,16 @@
                     <form action="{{ route('parcs.update', $parc->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="mb-1">
-                            <label for="name" class="form-label">Type de parc</label>
+                        <div class="form-floating mb-1">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" aria-describedby="nameHelp" value="{{ old('name', $parc->name) }}">
+                                name="name" placeholder="" value="{{ old('name', $parc->name) }}">
+                            <label for="name">Type de parc</label>
                             @error('name')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-1">
-                            <label for="typeparc_id" class="form-label">Type parc</label>
+                        <div class="form-floating mb-1">
                             <select class="form-select @error('typeparc_id') is-invalid @enderror" id="typeparc_id"
                                 aria-label="Default select example" name="typeparc_id" aria-describedby="typeparc_idHelp">
                                 <option selected value="">Type de parc ----</option>
@@ -38,14 +37,15 @@
                                     </option>
                                 @endforeach
                             </select>
+                            <label for="typeparc_id" class="form-label">Type parc</label>
                             @error('typeparc_id')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mb-1">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="3"
-                                class="form-control @error('description') is-invalid @enderror">{{ old('description', $parc->description) }}</textarea>
+                        <div class="form-floating mb-1">
+                            <textarea name="description" id="description" style="height: 100px" placeholder=""
+                                class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                            <label for="description">Description</label>
                             @error('description')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror
