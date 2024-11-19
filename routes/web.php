@@ -3,8 +3,10 @@
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EnginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LubrifiantController;
 use App\Http\Controllers\ParcController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\TypelubrifiantController;
 use App\Http\Controllers\TypeparcController;
 use App\Livewire\Counter;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +26,8 @@ Route::prefix('configs')->group(function () {
     Route::resource('typeparcs', TypeparcController::class);
     Route::resource('parcs', ParcController::class);
     Route::resource('engins', EnginController::class);
+    Route::resource('typelubrifiants', TypelubrifiantController::class);
+    Route::resource('lubrifiants', LubrifiantController::class);
 });
 
 Route::get('/counter', Counter::class);

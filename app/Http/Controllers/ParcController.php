@@ -32,7 +32,7 @@ class ParcController extends Controller
             return view('configs.parcs.create', ['typeparcs' => $typeparcs]);
         } catch (\Throwable $th) {
             return redirect()->route('parcs.index')->with('error', $th->getMessage());
-        } //
+        }
     }
 
     /**
@@ -96,6 +96,7 @@ class ParcController extends Controller
         ]);
         try {
             $parc->name = $request->input('name');
+            $parc->typeparc_id = $request->input('typeparc_id');
             $parc->description = $request->input('description') ?? "";
             $parc->updated_At = new DateTime(now());
 

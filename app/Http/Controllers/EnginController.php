@@ -47,20 +47,20 @@ class EnginController extends Controller
     public function store(Request $request)
     {
         $request['name'] = $request->name;
-        $request['typeparc_id'] = $request->typeparc_id;
+        $request['parc_id'] = $request->parc_id;
         $request['description'] = $request->description;
 
         $request->validate([
-            'name'          => ['required', 'unique:parcs', 'max:255'],
-            'typeparc_id'   => ['required'],
+            'name'          => ['required', 'unique:engins', 'max:255'],
+            'parc_id'       => ['required'],
         ]);
         try {
-            Parc::create([
+            Engin::create([
                 'name'          => $request['name'],
-                'typeparc_id'   => $request['typeparc_id'],
+                'parc_id'       => $request['parc_id'],
                 'description'   => $request['description']
             ]);
-            return redirect()->route('engins.index')->with('success', 'Parc ajouté avec succès!');
+            return redirect()->route('engins.index')->with('success', 'Engin ajouté avec succès!');
         } catch (\Throwable $th) {
             return redirect()->route('engins.create')->with('error', $th->getMessage());
         }
@@ -84,8 +84,8 @@ class EnginController extends Controller
     public function edit(Engin $engin)
     {
         try {
-            $typeparcs = Typeparc::orderBy('name', 'asc')->get();
-            $data = ['engin' => $engin, 'typeparcs' => $typeparcs];
+            $parcs = Parc::orderBy('name', 'asc')->get();
+            $data = ['engin' => $engin, 'parcs' => $parcs];
             return View('configs.engins.edit', $data);
         } catch (\Throwable $th) {
             return redirect()->route('engins.index')->with('error', $th->getMessage());
@@ -99,10 +99,11 @@ class EnginController extends Controller
     {
         $request->validate([
             'name'          => ['required', 'unique:engins,name,' . $engin->id, 'max:255'],
-            'typeparc_id'   => ['required'],
+            'parc_id'       => ['required'],
         ]);
         try {
             $engin->name = $request->input('name');
+            $engin->parc_id = $request->input('parc_id');
             $engin->description = $request->input('description') ?? "";
             $engin->updated_At = new DateTime(now());
 

@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Typelubrifiant;
+use DateTime;
+use Illuminate\Http\Request;
+
+class TypelubrifiantController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        try {
+            $typelubrifiants = Typelubrifiant::orderBy('name', 'asc')->paginate(10);
+            return view('configs.typelubrifiants.index', ['typelubrifiants' => $typelubrifiants]);
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        try {
+            return view('configs.typelubrifiants.create');
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request['name'] = $request->name;
+        $request['description'] = $request->description;
+
+        $request->validate([
+            'name'          => ['required', 'unique:typelubrifiants', 'max:255'],
+            'description'   => ['max:255'],
+        ]);
+
+        try {
+            Typelubrifiant::create([
+                'name'          => $request['name'],
+                'description'   => $request['description']
+            ]);
+            return redirect()->route('typelubrifiants.index')->with('success', 'Type lubrifiant ajouté avec succès!');
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.create')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Typelubrifiant $typelubrifiant)
+    {
+        try {
+            return View('configs.typelubrifiants.show', ['typelubrifiant' => $typelubrifiant]);
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Typelubrifiant $typelubrifiant)
+    {
+        try {
+            return View('configs.typelubrifiants.edit', ['typelubrifiant' => $typelubrifiant]);
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Typelubrifiant $typelubrifiant)
+    {
+        $request->validate([
+            'name'          => ['required', 'unique:typelubrifiants,name,' . $typelubrifiant->id, 'max:255'],
+            'description'   => ['max:255'],
+        ]);
+        try {
+            $typelubrifiant->name = $request->input('name');
+            $typelubrifiant->description = $request->input('description') ?? "";
+            $typelubrifiant->updated_At = new DateTime(now());
+
+            $typelubrifiant->save();
+            return redirect()->route('typelubrifiants.index')->with('success', 'Type lubrifiant modifié avec succès.');
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Typelubrifiant $typelubrifiant)
+    {
+        try {
+            Typelubrifiant::destroy($typelubrifiant->id);
+            return redirect()->route('typelubrifiants.index')->with('success', 'Type lubrifiant supprimé avec succès!');
+        } catch (\Throwable $th) {
+            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+        }
+    }
+}

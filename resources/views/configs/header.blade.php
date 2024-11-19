@@ -34,6 +34,18 @@ $items = [
         'active' => $page == 'engins' ? ' active' : '',
         'icon' => 'bi bi-truck-flatbed',
     ],
+    (object) [
+        'title' => 'Types lubrifiants',
+        'link' => 'typelubrifiants.index',
+        'active' => $page == 'typelubrifiants' ? ' active' : '',
+        'icon' => 'bi bi-diagram-3',
+    ],
+    (object) [
+        'title' => 'Lubrifiants',
+        'link' => 'lubrifiants.index',
+        'active' => $page == 'lubrifiants' ? ' active' : '',
+        'icon' => 'bi bi-diagram-3',
+    ],
 ];
 ?>
 

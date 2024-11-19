@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-floating mb-1">
                             <textarea name="description" id="description" style="height: 100px" placeholder=""
-                                class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                                class="form-control @error('description') is-invalid @enderror">{{ old('description', $parc->description) }}</textarea>
                             <label for="description">Description</label>
                             @error('description')
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
