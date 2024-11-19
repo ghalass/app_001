@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Typeparc;
+use DateTime;
+use Illuminate\Http\Request;
+
+class TypeparcController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        try {
+            $typeparcs = Typeparc::orderBy('name', 'asc')->paginate(10);
+            return view('configs.typeparcs.index', ['typeparcs' => $typeparcs]);
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        try {
+            return view('configs.typeparcs.create');
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request['name'] = $request->name;
+        $request['description'] = $request->description;
+
+        $request->validate([
+            'name'          => ['required', 'unique:typeparcs', 'max:255'],
+            'description'   => ['max:255'],
+        ]);
+
+        try {
+            Typeparc::create([
+                'name'          => $request['name'],
+                'description'   => $request['description']
+            ]);
+            return redirect()->route('typeparcs.index')->with('success', 'Type parc ajouté avec succès!');
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.create')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Typeparc $typeparc)
+    {
+        try {
+            return View('configs.typeparcs.show', ['typeparc' => $typeparc]);
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Typeparc $typeparc)
+    {
+        try {
+            return View('configs.typeparcs.edit', ['typeparc' => $typeparc]);
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Typeparc $typeparc)
+    {
+        $request->validate([
+            'name'          => ['required', 'unique:typeparcs,name,' . $typeparc->id, 'max:255'],
+            'description'   => ['max:255'],
+        ]);
+        try {
+            $typeparc->name = $request->input('name');
+            $typeparc->description = $request->input('description') ?? "";
+            $typeparc->updated_At = new DateTime();
+
+            $typeparc->save();
+            return redirect()->route('typeparcs.index')->with('success', 'Type parc modifié avec succès.');
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Typeparc $typeparc)
+    {
+        try {
+            Typeparc::destroy($typeparc->id);
+            return redirect()->route('typeparcs.index')->with('success', 'Type parc supprimé avec succès!');
+        } catch (\Throwable $th) {
+            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+        }
+    }
+}
