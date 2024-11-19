@@ -5,7 +5,7 @@
 <?php $page = 'configs'; ?>
 
 @section('content')
-    @include('configs.header')
+    @include('configs._shared.header')
 
     <div class="mt-4 text-center">
         <h1 class="mb-4">

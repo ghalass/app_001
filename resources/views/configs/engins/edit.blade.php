@@ -5,7 +5,7 @@
 <?php $page = 'engins'; ?>
 
 @section('content')
-    @include('configs.header')
+    @include('configs._shared.header')
 
     <div class="mt-2">
         <div class="text-center">

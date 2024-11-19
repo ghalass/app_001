@@ -5,7 +5,7 @@
 <?php $page = 'typeparcs'; ?>
 
 @section('content')
-    @include('configs.header')
+    @include('configs._shared.header')
 
     <div class="mt-2">
         @include('configs._shared.subheader')
