@@ -35,9 +35,9 @@ class EnginController extends Controller
                 'typeparcs' => $typeparcs,
                 'parcs' => $parcs,
             ];
-            return view('configs.parcs.create', $data);
+            return view('configs.engins.create', $data);
         } catch (\Throwable $th) {
-            return redirect()->route('parcs.index')->with('error', $th->getMessage());
+            return redirect()->route('engins.index')->with('error', $th->getMessage());
         } //
     }
 
@@ -60,9 +60,9 @@ class EnginController extends Controller
                 'typeparc_id'   => $request['typeparc_id'],
                 'description'   => $request['description']
             ]);
-            return redirect()->route('parcs.index')->with('success', 'Parc ajouté avec succès!');
+            return redirect()->route('engins.index')->with('success', 'Parc ajouté avec succès!');
         } catch (\Throwable $th) {
-            return redirect()->route('parcs.create')->with('error', $th->getMessage());
+            return redirect()->route('engins.create')->with('error', $th->getMessage());
         }
     }
 
@@ -88,7 +88,7 @@ class EnginController extends Controller
             $data = ['engin' => $engin, 'typeparcs' => $typeparcs];
             return View('configs.engins.edit', $data);
         } catch (\Throwable $th) {
-            return redirect()->route('parcs.index')->with('error', $th->getMessage());
+            return redirect()->route('engins.index')->with('error', $th->getMessage());
         }
     }
 
