@@ -14,8 +14,16 @@ class TypelubrifiantController extends Controller
     public function index()
     {
         try {
-            $typelubrifiants = Typelubrifiant::orderBy('name', 'asc')->paginate(10);
-            return view('configs.typelubrifiants.index', ['typelubrifiants' => $typelubrifiants]);
+            $typelubrifiants = Typelubrifiant::orderBy('name', 'asc');
+            if (request()->has('search'))
+                $typelubrifiants = $typelubrifiants->where('name', 'like', '%' . request()->get('search', '') . '%');
+
+            $data = [
+                'typelubrifiants' => $typelubrifiants->paginate(10),
+                'search' => request()->get('search', '')
+            ];
+
+            return view('configs.typelubrifiants.index', $data);
         } catch (\Throwable $th) {
             return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
         }

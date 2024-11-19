@@ -22,7 +22,9 @@ Auth::routes();
 // /configs
 Route::prefix('configs')->group(function () {
     Route::get('/', [ConfigController::class, 'index'])->name('configs');
+
     Route::resource('sites', SiteController::class);
+
     Route::resource('typeparcs', TypeparcController::class);
     Route::resource('parcs', ParcController::class);
     Route::resource('engins', EnginController::class);

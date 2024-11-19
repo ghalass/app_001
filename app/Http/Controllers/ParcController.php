@@ -15,8 +15,16 @@ class ParcController extends Controller
     public function index()
     {
         try {
-            $parcs = Parc::orderBy('name', 'asc')->paginate(10);
-            return view('configs.parcs.index', ['parcs' => $parcs]);
+            $parcs = Parc::orderBy('name', 'asc');
+            if (request()->has('search'))
+                $parcs = $parcs->where('name', 'like', '%' . request()->get('search', '') . '%');
+
+            $data = [
+                'parcs' => $parcs->paginate(10),
+                'search' => request()->get('search', '')
+            ];
+
+            return view('configs.parcs.index', $data);
         } catch (\Throwable $th) {
             return redirect()->route('parcs.index')->with('error', $th->getMessage());
         }

@@ -14,8 +14,16 @@ class SiteController extends Controller
     public function index()
     {
         try {
-            $sites = Site::orderBy('name', 'asc')->paginate(10);
-            return view('configs.sites.index', ['sites' => $sites]);
+            $sites = Site::orderBy('name', 'asc');
+            if (request()->has('search'))
+                $sites = $sites->where('name', 'like', '%' . request()->get('search', '') . '%');
+
+            $data = [
+                'sites' => $sites->paginate(10),
+                'search' => request()->get('search', '')
+            ];
+
+            return view('configs.sites.index', $data);
         } catch (\Throwable $th) {
             return redirect()->route('sites.index')->with('error', $th->getMessage());
         }
@@ -114,4 +122,18 @@ class SiteController extends Controller
             return redirect()->route('sites.index')->with('error', $th->getMessage());
         }
     }
+
+    // public function search(Request $request)
+    // {
+    //     try {
+    //         // dd($request->search);
+    //         $search = $request->search ?? "";
+    //         $sites = Site::where('name', 'like', '%' . $search . '%')->orderBy('name', 'asc')->paginate(10);
+    //         // $sites = Site::orderBy('name', 'asc')->paginate(10);
+    //         $data = ['sites' => $sites, 'search' => $search];
+    //         return view('configs.sites.index', $data);
+    //     } catch (\Throwable $th) {
+    //         return redirect()->route('sites.index')->with('error', $th->getMessage());
+    //     }
+    // }
 }

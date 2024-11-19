@@ -15,8 +15,16 @@ class LubrifiantController extends Controller
     public function index()
     {
         try {
-            $lubrifiants = Lubrifiant::orderBy('name', 'asc')->paginate(10);
-            return view('configs.lubrifiants.index', ['lubrifiants' => $lubrifiants]);
+            $lubrifiants = Lubrifiant::orderBy('name', 'asc');
+            if (request()->has('search'))
+                $lubrifiants = $lubrifiants->where('name', 'like', '%' . request()->get('search', '') . '%');
+
+            $data = [
+                'lubrifiants' => $lubrifiants->paginate(10),
+                'search' => request()->get('search', '')
+            ];
+
+            return view('configs.lubrifiants.index', $data);
         } catch (\Throwable $th) {
             return redirect()->route('lubrifiants.index')->with('error', $th->getMessage());
         }

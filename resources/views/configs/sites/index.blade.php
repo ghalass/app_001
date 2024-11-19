@@ -5,16 +5,10 @@
 <?php $page = 'sites'; ?>
 
 @section('content')
-    @include('configs.header')
+    @include('configs._shared.header')
 
     <div class="mt-2">
-        <div class="text-center">
-            <h1 class="">Liste des sites</h1>
-            <a class=" btn btn-sm btn-outline-success mb-1" href={{ route('sites.create') }}>
-                <i class="bi bi-plus-lg"></i>
-                Nouveau
-            </a>
-        </div>
+        @include('configs._shared.subheader')
 
         <div class="d-flex justify-content-center">{{ $sites->onEachSide(1)->links() }}</div>
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">

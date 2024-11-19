@@ -14,8 +14,16 @@ class TypeparcController extends Controller
     public function index()
     {
         try {
-            $typeparcs = Typeparc::orderBy('name', 'asc')->paginate(10);
-            return view('configs.typeparcs.index', ['typeparcs' => $typeparcs]);
+            $typeparcs = Typeparc::orderBy('name', 'asc');
+            if (request()->has('search'))
+                $typeparcs = $typeparcs->where('name', 'like', '%' . request()->get('search', '') . '%');
+
+            $data = [
+                'typeparcs' => $typeparcs->paginate(10),
+                'search' => request()->get('search', '')
+            ];
+
+            return view('configs.typeparcs.index', $data);
         } catch (\Throwable $th) {
             return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
         }

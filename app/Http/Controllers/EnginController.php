@@ -16,8 +16,16 @@ class EnginController extends Controller
     public function index()
     {
         try {
-            $engins = Engin::orderBy('name', 'asc')->paginate(10);
-            return view('configs.engins.index', ['engins' => $engins]);
+            $engins = Engin::orderBy('name', 'asc');
+            if (request()->has('search'))
+                $engins = $engins->where('name', 'like', '%' . request()->get('search', '') . '%');
+
+            $data = [
+                'engins' => $engins->paginate(10),
+                'search' => request()->get('search', '')
+            ];
+
+            return view('configs.engins.index', $data);
         } catch (\Throwable $th) {
             return redirect()->route('engins.index')->with('error', $th->getMessage());
         }

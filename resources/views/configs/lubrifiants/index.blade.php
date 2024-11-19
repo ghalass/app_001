@@ -8,13 +8,8 @@
     @include('configs.header')
 
     <div class="mt-2">
-        <div class="text-center">
-            <h1 class="">Liste des lubrifiants</h1>
-            <a class=" btn btn-sm btn-outline-success mb-1" href={{ route('lubrifiants.create') }}>
-                <i class="bi bi-plus-lg"></i>
-                Nouveau
-            </a>
-        </div>
+        @include('configs._shared.subheader')
+
         <div class="d-flex justify-content-center">{{ $lubrifiants->onEachSide(1)->links() }}</div>
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
             @foreach ($lubrifiants as $lubrifiant)
