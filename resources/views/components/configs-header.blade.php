@@ -35,13 +35,13 @@ $items = [
         'title' => 'Types lubrifiants',
         'link' => 'typelubrifiants.index',
         'active' => $page == 'typelubrifiants' ? ' active' : '',
-        'icon' => 'bi bi-diagram-3',
+        'icon' => 'bi bi-droplet-fill',
     ],
     (object) [
         'title' => 'Lubrifiants',
         'link' => 'lubrifiants.index',
         'active' => $page == 'lubrifiants' ? ' active' : '',
-        'icon' => 'bi bi-diagram-3',
+        'icon' => 'bi bi-droplet-half',
     ],
 ];
 ?>

@@ -11,7 +11,7 @@
         </div>
 
         <div class="d-flex gap-1 justify-content-center">
-
+            <x-configs-card :$item page="typeparc" />
         </div>
     </div>
 @endsection

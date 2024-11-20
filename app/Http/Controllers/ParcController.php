@@ -74,7 +74,7 @@ class ParcController extends Controller
     public function show(Parc $parc)
     {
         try {
-            return View('configs.parcs.show', ['parc' => $parc]);
+            return View('configs.parcs.show', ['item' => $parc]);
         } catch (\Throwable $th) {
             return redirect()->route('parcs.index')->with('error', $th->getMessage());
         }

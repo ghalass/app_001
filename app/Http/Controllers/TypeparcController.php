@@ -71,7 +71,7 @@ class TypeparcController extends Controller
     public function show(Typeparc $typeparc)
     {
         try {
-            return View('configs.typeparcs.show', ['typeparc' => $typeparc]);
+            return View('configs.typeparcs.show', ['item' => $typeparc]);
         } catch (\Throwable $th) {
             return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
         }

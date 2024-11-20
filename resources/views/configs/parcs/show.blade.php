@@ -12,7 +12,7 @@
         </div>
 
         <div class="d-flex gap-1 justify-content-center">
-
+            <x-configs-card :$item page="parc" />
         </div>
     </div>
 @endsection

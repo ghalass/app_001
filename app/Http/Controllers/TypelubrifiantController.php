@@ -71,7 +71,7 @@ class TypelubrifiantController extends Controller
     public function show(Typelubrifiant $typelubrifiant)
     {
         try {
-            return View('configs.typelubrifiants.show', ['typelubrifiant' => $typelubrifiant]);
+            return View('configs.typelubrifiants.show', ['item' => $typelubrifiant]);
         } catch (\Throwable $th) {
             return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
         }

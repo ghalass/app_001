@@ -71,7 +71,7 @@ class SiteController extends Controller
     public function show(Site $site)
     {
         try {
-            return View('configs.sites.show', ['site' => $site]);
+            return View('configs.sites.show', ['item' => $site]);
         } catch (\Throwable $th) {
             return redirect()->route('sites.index')->with('error', $th->getMessage());
         }

@@ -80,7 +80,7 @@ class EnginController extends Controller
     public function show(Engin $engin)
     {
         try {
-            return View('configs.engins.show', ['engin' => $engin]);
+            return View('configs.engins.show', ['item' => $engin]);
         } catch (\Throwable $th) {
             return redirect()->route('engins.index')->with('error', $th->getMessage());
         }

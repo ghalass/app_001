@@ -74,7 +74,7 @@ class LubrifiantController extends Controller
     public function show(Lubrifiant $lubrifiant)
     {
         try {
-            return View('configs.lubrifiants.show', ['lubrifiant' => $lubrifiant]);
+            return View('configs.lubrifiants.show', ['item' => $lubrifiant]);
         } catch (\Throwable $th) {
             return redirect()->route('lubrifiants.index')->with('error', $th->getMessage());
         }
