@@ -11,48 +11,14 @@
             Statistiques des configurations
         </h1>
         <div class="d-flex flex-wrap justify-content-center gap-4">
-            <a href="{{ route('sites.index') }}" class="btn btn-outline-primary position-relative">
-                <i class="bi bi-geo-alt-fill"></i>
-                Sites
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ $total_sites }}
-                </span>
-            </a>
-
-            <a href="{{ route('typeparcs.index') }}" class="btn btn-outline-primary position-relative">
-                Types parc
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ $total_typeparcs }}
-                </span>
-            </a>
-
-            <a href="{{ route('parcs.index') }}" class="btn btn-outline-primary position-relative">
-                Parcs
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ $total_parcs }}
-                </span>
-            </a>
-
-            <a href="{{ route('engins.index') }}" class="btn btn-outline-primary position-relative">
-                Engins
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ $total_engins }}
-                </span>
-            </a>
-
-            <a href="{{ route('typelubrifiants.index') }}" class="btn btn-outline-primary position-relative">
-                Types lubrifiant
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ $total_typelubrifiants }}
-                </span>
-            </a>
-
-            <a href="{{ route('lubrifiants.index') }}" class="btn btn-outline-primary position-relative">
-                Lubrifiants
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ $total_lubrifiants }}
-                </span>
-            </a>
+            <x-config-statistique title="Sites" :total="$total_sites" link='sites.index' icon='bi bi-geo-alt-fill' />
+            <x-config-statistique title="Types parc" :total="$total_typeparcs" link='typeparcs.index' icon='bi bi-diagram-3' />
+            <x-config-statistique title="Parcs" :total="$total_parcs" link='parcs.index' icon='bi bi-truck' />
+            <x-config-statistique title="Engins" :total="$total_engins" link='engins.index' icon='bi bi-truck-flatbed' />
+            <x-config-statistique title="Types lubrifiant" :total="$total_typelubrifiants" link='typelubrifiants.index'
+                icon='bi bi-droplet-fill' />
+            <x-config-statistique title="Lubrifiants" :total="$total_lubrifiants" link='lubrifiants.index'
+                icon='bi bi-droplet-half' />
         </div>
     </div>
 @endsection

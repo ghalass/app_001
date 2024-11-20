@@ -21,8 +21,6 @@
                             class='btn-outline-primary float-end' />
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
