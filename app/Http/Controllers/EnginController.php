@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Engin;
 use App\Models\Parc;
+use App\Models\Site;
 use App\Models\Typeparc;
 use DateTime;
 use Illuminate\Http\Request;
@@ -37,11 +38,10 @@ class EnginController extends Controller
     public function create()
     {
         try {
-            $typeparcs = Typeparc::orderBy('name', 'asc')->get();
-            $parcs = Parc::orderBy('name', 'asc')->get();
             $data = [
-                'typeparcs' => $typeparcs,
-                'parcs' => $parcs,
+                'sites' => Site::orderBy('name', 'asc')->get(),
+                'typeparcs' => Typeparc::orderBy('name', 'asc')->get(),
+                'parcs' => Parc::orderBy('name', 'asc')->get(),
             ];
             return view('configs.engins.create', $data);
         } catch (\Throwable $th) {
@@ -95,8 +95,11 @@ class EnginController extends Controller
     public function edit(Engin $engin)
     {
         try {
-            $parcs = Parc::orderBy('name', 'asc')->get();
-            $data = ['engin' => $engin, 'parcs' => $parcs];
+            $data = [
+                'sites' => Site::orderBy('name', 'asc')->get(),
+                'engin' => $engin,
+                'parcs' => Parc::orderBy('name', 'asc')->get()
+            ];
             return View('configs.engins.edit', $data);
         } catch (\Throwable $th) {
             return redirect()->route('engins.index')->with('error', $th->getMessage());

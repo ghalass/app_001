@@ -40,6 +40,25 @@
                                 <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="form-floating mb-1">
+                            <select class="form-select @error('site_id') is-invalid @enderror" id="site_id"
+                                aria-label="Default select example" name="site_id">
+                                <option selected value="">Site ----</option>
+                                @foreach ($sites as $site)
+                                    <option value="{{ $site->id }}"
+                                        {{ old('site_id') == $site->id || $site->id == $engin->site_id ? 'selected' : '' }}>
+                                        {{ $site->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="site_id" class="form-label">site</label>
+                            @error('site_id')
+                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
                         <div class="form-floating mb-1">
                             <textarea name="description" id="description" style="height: 100px" placeholder=""
                                 class="form-control @error('description') is-invalid @enderror">{{ old('description', $engin->description) }}</textarea>
