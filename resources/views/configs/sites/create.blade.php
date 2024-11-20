@@ -15,31 +15,12 @@
                 <div class="card-body">
                     <form action="{{ route('sites.store') }}" method="POST" class="form-floating">
                         @csrf
-                        <div class="form-floating mb-1">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                id="floatingName" placeholder="" value={{ old('name') }}>
-                            <label for="floatingName">Site</label>
-                            @error('name')
-                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-floating mb-1">
-                            <textarea name="description" id="description" style="height: 100px" placeholder=""
-                                class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
-                            <label for="description">Description</label>
-                            @error('description')
-                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-outline-primary float-end">
-                            <i class="bi bi-floppy"></i>
-                            Sauvegarder
-                        </button>
+                        <x-forms.input name='name' label='Site' message={{ $message }} />
+                        <x-forms.textarea name='description' label='Description' message={{ $message }} />
+                        <x-forms.button type='submit' label='Sauvegarder' icon='bi bi-floppy'
+                            class='btn-outline-primary float-end' />
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>

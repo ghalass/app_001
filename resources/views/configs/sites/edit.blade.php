@@ -15,31 +15,14 @@
                     <form action="{{ route('sites.update', $site->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="form-floating mb-1">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" placeholder="" value="{{ old('name', $site->name) }}">
-                            <label for="floatingName">Site</label>
-                            @error('name')
-                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-floating mb-1">
-                            <textarea name="description" id="floatingTextareaDescription" style="height: 100px" placeholder=""
-                                class="form-control @error('description') is-invalid @enderror">{{ old('description', $site->description) }}</textarea>
-                            <label for="floatingTextareaDescription">Description</label>
-                            @error('description')
-                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-outline-primary float-end">
-                            <i class="bi bi-floppy"></i>
-                            Sauvegarder
-                        </button>
+                        <x-forms.input name='name' label='Site' message={{ $message }}
+                            defaultValue="{{ $site->name }}" />
+                        <x-forms.textarea name='description' label='Description' message={{ $message }}
+                            defaultValue="{{ $site->description }}" />
+                        <x-forms.button type='submit' label='Sauvegarder' icon='bi bi-floppy'
+                            class='btn-outline-primary float-end' />
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
