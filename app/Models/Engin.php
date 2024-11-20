@@ -11,10 +11,16 @@ class Engin extends Model
         'name',
         'description',
         'parc_id',
+        'site_id',
     ];
 
     public function parc(): BelongsTo
     {
         return $this->belongsTo(Parc::class);
+    }
+
+    public function site(): BelongsTo
+    {
+        return $this->belongsTo(Site::class);
     }
 }

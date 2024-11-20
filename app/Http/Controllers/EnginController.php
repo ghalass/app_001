@@ -56,16 +56,19 @@ class EnginController extends Controller
     {
         $request['name'] = $request->name;
         $request['parc_id'] = $request->parc_id;
+        $request['site_id'] = $request->site_id;
         $request['description'] = $request->description;
 
         $request->validate([
             'name'          => ['required', 'unique:engins', 'max:255'],
+            'site_id'       => ['required'],
             'parc_id'       => ['required'],
         ]);
         try {
             Engin::create([
                 'name'          => $request['name'],
                 'parc_id'       => $request['parc_id'],
+                'site_id'       => $request['site_id'],
                 'description'   => $request['description']
             ]);
             return redirect()->route('engins.index')->with('success', 'Engin ajouté avec succès!');
@@ -107,11 +110,13 @@ class EnginController extends Controller
     {
         $request->validate([
             'name'          => ['required', 'unique:engins,name,' . $engin->id, 'max:255'],
+            'site_id'       => ['required'],
             'parc_id'       => ['required'],
         ]);
         try {
             $engin->name = $request->input('name');
             $engin->parc_id = $request->input('parc_id');
+            $engin->site_id = $request->input('site_id');
             $engin->description = $request->input('description') ?? "";
             $engin->updated_At = new DateTime(now());
 
