@@ -15,27 +15,12 @@
                     <form action="{{ route('typelubrifiants.update', $typelubrifiant->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="form-floating mb-1">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" placeholder="" value="{{ old('name', $typelubrifiant->name) }}">
-                            <label for="name">Type de parc</label>
-                            @error('name')
-                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-floating mb-1">
-                            <textarea name="description" id="description" style="height: 100px" placeholder=""
-                                class="form-control @error('description') is-invalid @enderror">{{ old('description', $typelubrifiant->description) }}</textarea>
-                            <label for="description">Description</label>
-                            @error('description')
-                                <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-outline-primary float-end">
-                            <i class="bi bi-floppy"></i>
-                            Sauvegarder
-                        </button>
+                        <x-forms.input name='name' label='Type de parc' message={{ $message }}
+                            defaultValue="{{ $typelubrifiant->name }}" />
+                        <x-forms.textarea name='description' label='Description' message={{ $message }}
+                            defaultValue="{{ $typelubrifiant->description }}" />
+                        <x-forms.button type='submit' label='Sauvegarder' icon='bi bi-floppy'
+                            class='btn-outline-primary float-end' />
                     </form>
                 </div>
 
