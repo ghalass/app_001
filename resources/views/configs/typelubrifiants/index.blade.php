@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-center">{{ $typelubrifiants->onEachSide(1)->links() }}</div>
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
             @foreach ($typelubrifiants as $item)
-                <x-configs-card :item="$item" page="typelubrifiant" />
+                <x-configs-card :$item page="typelubrifiant" />
 
 
                 <!-- Modal -->

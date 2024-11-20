@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-center">{{ $engins->onEachSide(1)->links() }}</div>
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
             @foreach ($engins as $item)
-                <x-configs-card :item="$item" page="engin" />
+                <x-configs-card :$item page="engin" />
 
 
                 <!-- Modal -->
