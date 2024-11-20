@@ -2,10 +2,8 @@
 
 <title>Types lubrifiant</title>
 
-<?php $page = 'typelubrifiants'; ?>
-
 @section('content')
-    @include('configs._shared.header')
+    <x-configs-header page="typelubrifiants" />
 
     <div class="mt-2">
         <div class="text-center">

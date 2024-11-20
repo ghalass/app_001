@@ -2,10 +2,8 @@
 
 <title>Configs</title>
 
-<?php $page = 'configs'; ?>
-
 @section('content')
-    @include('configs._shared.header')
+    <x-configs-header page="configs" />
 
     <div class="mt-4 text-center">
         <h1 class="mb-4">

@@ -2,10 +2,8 @@
 
 <title>Parc</title>
 
-<?php $page = 'parcs'; ?>
-
 @section('content')
-    @include('configs._shared.header')
+    <x-configs-header page="parcs" />
 
     <div class="mt-2">
         <div class="text-center">

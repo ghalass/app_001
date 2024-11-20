@@ -2,63 +2,25 @@
 
 <title>Types parc</title>
 
-<?php $page = 'typeparcs'; ?>
-
 @section('content')
-    @include('configs._shared.header')
+    <x-configs-header page="typeparcs" />
 
     <div class="mt-2">
-        @include('configs._shared.subheader')
+        <x-configs-sub-header page="typeparcs" search="{{ $search }}" />
 
         <div class="d-flex justify-content-center">{{ $typeparcs->onEachSide(1)->links() }}</div>
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
-            @foreach ($typeparcs as $typeparc)
-                <div class="card" style="width: 250px;">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {{ substr($typeparc->name, 0, 15) }}
-                        </h5>
-                        <p class="card-text">
-                            @if (Str::length($typeparc->description) > 50)
-                                {{ substr($typeparc->description, 0, 50) . ' .....' }}
-                            @else
-                                {{ $typeparc->description }}
-                            @endif
-                        </p>
-
-                        <h6 class="card-subtitle mb-2 text-body-secondary float-end">
-                            Crée le : {{ $typeparc->created_at->format('d-m-Y à H:i') }}
-                        </h6>
-                        <h6 class="card-subtitle mb-2 text-body-secondary float-end">
-                            Modifié le : {{ $typeparc->updated_at->format('d-m-Y à H:i') }}
-                        </h6>
-                        <div class="float-end">
-                            <a class="btn btn-sm btn-outline-info"
-                                href={{ route('typeparcs.show', ['typeparc' => $typeparc]) }}>
-                                <i class="bi bi-eye-fill"></i>
-                            </a>
-                            <a class="btn btn-sm btn-outline-success"
-                                href={{ route('typeparcs.edit', ['typeparc' => $typeparc]) }}>
-                                <i class="bi bi-pen"></i>
-                            </a>
-
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="{{ '#exampleModal' . $typeparc->id }}">
-                                <i class="bi bi-trash3"></i>
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
+            @foreach ($typeparcs as $item)
+                <x-configs-card :item="$item" page="typeparc" />
 
 
                 <!-- Modal -->
-                <div class="modal fade   " data-bs-backdrop="static" id="{{ 'exampleModal' . $typeparc->id }}"
-                    tabindex="-1" aria-labelledby="{{ 'exampleModalLabel' . $typeparc->id }}" aria-hidden="true">
+                <div class="modal fade   " data-bs-backdrop="static" id="{{ 'exampleModal' . $item->id }}" tabindex="-1"
+                    aria-labelledby="{{ 'exampleModalLabel' . $item->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="{{ 'exampleModalLabel' . $typeparc->id }}">Suppression
+                                <h1 class="modal-title fs-5" id="{{ 'exampleModalLabel' . $item->id }}">Suppression
                                     d'un type parc</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
@@ -69,7 +31,7 @@
                                 <p>
                                     Type de parc :
                                     <span class="text-danger">
-                                        {{ $typeparc->name }}
+                                        {{ $item->name }}
                                     </span>
                                 </p>
                             </div>
@@ -80,7 +42,7 @@
 
 
 
-                                <form action="{{ route('typeparcs.destroy', $typeparc) }}" method="POST">
+                                <form action="{{ route('typeparcs.destroy', $item) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger">

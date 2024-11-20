@@ -1,7 +1,4 @@
 <?php
-if (!isset($page)) {
-    $page = 'typeparcs';
-}
 
 $items = [
     (object) [
