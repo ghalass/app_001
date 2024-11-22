@@ -133,11 +133,15 @@ class EnginController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Engin $engin)
+    public function destroy(Request $request, Engin $engin)
     {
         try {
-            Engin::destroy($engin->id);
-            return redirect()->route('engins.index')->with('success', 'Engin supprimé avec succès!');
+            if (isset($request->name_delete) && $request->name_delete == $engin->name) {
+                Engin::destroy($engin->id);
+                return redirect()->route('engins.index')->with('success', 'engin supprimé avec succès!');
+            } else {
+                return back()->with('error', "engin n'a pas été supprimé, veuillez saisir le nom du engin à supprimer");
+            }
         } catch (\Throwable $th) {
             return redirect()->route('engins.index')->with('error', $th->getMessage());
         }

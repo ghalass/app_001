@@ -43,6 +43,18 @@ $items = [
         'active' => $page == 'lubrifiants' ? ' active' : '',
         'icon' => 'bi bi-droplet-half',
     ],
+    (object) [
+        'title' => 'Types organes',
+        'link' => 'typeorganes.index',
+        'active' => $page == 'typeorganes' ? ' active' : '',
+        'icon' => 'bi bi-diagram-3',
+    ],
+    (object) [
+        'title' => 'Organes',
+        'link' => 'organes.index',
+        'active' => $page == 'organes' ? ' active' : '',
+        'icon' => 'bi bi-truck',
+    ],
 ];
 ?>
 

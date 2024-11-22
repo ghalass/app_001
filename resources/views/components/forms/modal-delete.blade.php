@@ -12,7 +12,7 @@
                 <p class="text-center text-danger fst-italic">Voulez-vous vraiment supprimer ce {{ $model }} ?
                 </p>
                 <p>
-                    {{ ucfirst($model) }} :
+                    {{ $model }} :
                     <span class="text-danger">
                         {{ $item->name }}
                     </span>

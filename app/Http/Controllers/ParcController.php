@@ -118,11 +118,15 @@ class ParcController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Parc $parc)
+    public function destroy(Request $request, Parc $parc)
     {
         try {
-            Parc::destroy($parc->id);
-            return redirect()->route('parcs.index')->with('success', 'parc supprimé avec succès!');
+            if (isset($request->name_delete) && $request->name_delete == $parc->name) {
+                Parc::destroy($parc->id);
+                return redirect()->route('parcs.index')->with('success', 'parc supprimé avec succès!');
+            } else {
+                return back()->with('error', "parc n'a pas été supprimé, veuillez saisir le nom du parc à supprimer");
+            }
         } catch (\Throwable $th) {
             return redirect()->route('parcs.index')->with('error', $th->getMessage());
         }

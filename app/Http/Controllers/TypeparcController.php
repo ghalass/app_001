@@ -113,11 +113,15 @@ class TypeparcController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Typeparc $typeparc)
+    public function destroy(Request $request, Typeparc $typeparc)
     {
         try {
-            Typeparc::destroy($typeparc->id);
-            return redirect()->route('typeparcs.index')->with('success', 'Type parc supprimé avec succès!');
+            if (isset($request->name_delete) && $request->name_delete == $typeparc->name) {
+                Typeparc::destroy($typeparc->id);
+                return redirect()->route('typeparcs.index')->with('success', 'typeparc supprimé avec succès!');
+            } else {
+                return back()->with('error', "typeparc n'a pas été supprimé, veuillez saisir le nom du typeparc à supprimer");
+            }
         } catch (\Throwable $th) {
             return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
         }

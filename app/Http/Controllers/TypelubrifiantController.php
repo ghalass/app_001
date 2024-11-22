@@ -113,11 +113,15 @@ class TypelubrifiantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Typelubrifiant $typelubrifiant)
+    public function destroy(Request $request, Typelubrifiant $typelubrifiant)
     {
         try {
-            Typelubrifiant::destroy($typelubrifiant->id);
-            return redirect()->route('typelubrifiants.index')->with('success', 'Type lubrifiant supprimé avec succès!');
+            if (isset($request->name_delete) && $request->name_delete == $typelubrifiant->name) {
+                Typelubrifiant::destroy($typelubrifiant->id);
+                return redirect()->route('typelubrifiants.index')->with('success', 'typelubrifiant supprimé avec succès!');
+            } else {
+                return back()->with('error', "typelubrifiant n'a pas été supprimé, veuillez saisir le nom du typelubrifiant à supprimer");
+            }
         } catch (\Throwable $th) {
             return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
         }

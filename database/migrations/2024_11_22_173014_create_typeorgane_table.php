@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('engins', function (Blueprint $table) {
-            $table->foreignId('site_id')->nullable()->constrained('sites');
+        Schema::create('typeorganes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('description', 250)->nullable()->default('desc typeorgane');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('engins', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('typeorganes');
     }
 };

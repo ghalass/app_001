@@ -118,11 +118,15 @@ class LubrifiantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lubrifiant $lubrifiant)
+    public function destroy(Request $request, Lubrifiant $lubrifiant)
     {
         try {
-            Lubrifiant::destroy($lubrifiant->id);
-            return redirect()->route('lubrifiants.index')->with('success', 'Lubrifiant supprimé avec succès!');
+            if (isset($request->name_delete) && $request->name_delete == $lubrifiant->name) {
+                Lubrifiant::destroy($lubrifiant->id);
+                return redirect()->route('lubrifiants.index')->with('success', 'lubrifiant supprimé avec succès!');
+            } else {
+                return back()->with('error', "lubrifiant n'a pas été supprimé, veuillez saisir le nom du lubrifiant à supprimer");
+            }
         } catch (\Throwable $th) {
             return redirect()->route('lubrifiants.index')->with('error', $th->getMessage());
         }
