@@ -132,7 +132,7 @@ class SiteController extends Controller
                 Site::destroy($site->id);
                 return redirect()->route('sites.index')->with('success', 'Site supprimé avec succès!');
             } else {
-                return back()->with('error', "Site n'a pas été supprimé, veuillez saisir le nom du site à supprimer");
+                return back()->with('info', "Site n'a pas été supprimé, veuillez saisir le nom du site à supprimer");
             }
         } catch (\Throwable $th) {
             return redirect()->route('sites.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");

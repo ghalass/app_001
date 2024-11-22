@@ -1,5 +1,5 @@
 {{-- Message --}}
-<div class="container">
+{{-- <div class="container">
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -19,4 +19,4 @@
             <strong>Error !</strong> {{ session('error') }}
         </div>
     @endif
-</div>
+</div> --}}
