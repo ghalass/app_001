@@ -12,7 +12,7 @@
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
             @foreach ($engins as $item)
                 <x-configs-card :$item page="engin" />
-                <x-forms.modal-delete :$item model="engin" />
+                {{-- <x-forms.modal-delete :$item model="engin" /> --}}
             @endforeach
         </div>
     </div>

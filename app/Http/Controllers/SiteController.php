@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Engin;
+use App\Models\Parc;
 use App\Models\Site;
+use App\Models\Typeparc;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -71,7 +74,16 @@ class SiteController extends Controller
     public function show(Site $site)
     {
         try {
-            return View('configs.sites.show', ['item' => $site]);
+            $engins = Engin::orderBy('name', 'asc')->where('site_id', $site->id);
+            $typeparcs = Typeparc::orderBy('name', 'asc')->get();
+            $parcs = Parc::orderBy('name', 'asc')->get();
+            $data = [
+                'engins' => $engins->paginate(2),
+                'typeparcs' => $typeparcs,
+                'parcs' => $parcs,
+                'item' => $site
+            ];
+            return View('configs.sites.show', $data);
         } catch (\Throwable $th) {
             return redirect()->route('sites.index')->with('error', $th->getMessage());
         }
@@ -95,7 +107,7 @@ class SiteController extends Controller
     public function update(Request $request, Site $site)
     {
         $request->validate([
-            'name'          => ['required', 'unique:typeparcs,name,' . $site->id, 'max:255'],
+            'name'          => ['required', 'unique:sites,name,' . $site->id, 'max:255'],
             'description'   => ['max:255'],
         ]);
         try {
@@ -123,7 +135,7 @@ class SiteController extends Controller
                 return back()->with('error', "Site n'a pas été supprimé, veuillez saisir le nom du site à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('sites.index')->with('error', $th->getMessage());
+            return redirect()->route('sites.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

@@ -143,7 +143,7 @@ class EnginController extends Controller
                 return back()->with('error', "engin n'a pas été supprimé, veuillez saisir le nom du engin à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('engins.index')->with('error', $th->getMessage());
+            return redirect()->route('engins.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

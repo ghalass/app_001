@@ -123,7 +123,7 @@ class TypelubrifiantController extends Controller
                 return back()->with('error', "typelubrifiant n'a pas été supprimé, veuillez saisir le nom du typelubrifiant à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('typelubrifiants.index')->with('error', $th->getMessage());
+            return redirect()->route('typelubrifiants.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

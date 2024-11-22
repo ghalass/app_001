@@ -123,7 +123,7 @@ class TypeorganeController extends Controller
                 return back()->with('error', "typeorgane n'a pas été supprimé, veuillez saisir le nom du typeorgane à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('typeorganes.index')->with('error', $th->getMessage());
+            return redirect()->route('typeorganes.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

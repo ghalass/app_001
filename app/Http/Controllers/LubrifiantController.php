@@ -128,7 +128,7 @@ class LubrifiantController extends Controller
                 return back()->with('error', "lubrifiant n'a pas été supprimé, veuillez saisir le nom du lubrifiant à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('lubrifiants.index')->with('error', $th->getMessage());
+            return redirect()->route('lubrifiants.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

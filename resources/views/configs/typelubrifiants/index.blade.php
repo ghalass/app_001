@@ -12,7 +12,7 @@
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
             @foreach ($typelubrifiants as $item)
                 <x-configs-card :$item page="typelubrifiant" />
-                <x-forms.modal-delete :$item model="typelubrifiant" />
+                {{-- <x-forms.modal-delete :$item model="typelubrifiant" /> --}}
             @endforeach
         </div>
     </div>

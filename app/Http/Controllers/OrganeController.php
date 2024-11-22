@@ -128,7 +128,7 @@ class OrganeController extends Controller
                 return back()->with('error', "organe n'a pas été supprimé, veuillez saisir le nom du organe à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('organes.index')->with('error', $th->getMessage());
+            return redirect()->route('organes.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

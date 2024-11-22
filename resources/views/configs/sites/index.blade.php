@@ -12,7 +12,6 @@
         <div class="d-flex flex-wrap justify-content-center gap-1 mt-1">
             @foreach ($sites as $item)
                 <x-configs-card :$item page="site" />
-                <x-forms.modal-delete :$item model="site" />
             @endforeach
         </div>
     </div>

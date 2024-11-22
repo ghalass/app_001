@@ -128,7 +128,7 @@ class ParcController extends Controller
                 return back()->with('error', "parc n'a pas été supprimé, veuillez saisir le nom du parc à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('parcs.index')->with('error', $th->getMessage());
+            return redirect()->route('parcs.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }

@@ -123,7 +123,7 @@ class TypeparcController extends Controller
                 return back()->with('error', "typeparc n'a pas été supprimé, veuillez saisir le nom du typeparc à supprimer");
             }
         } catch (\Throwable $th) {
-            return redirect()->route('typeparcs.index')->with('error', $th->getMessage());
+            return redirect()->route('typeparcs.index')->with('error', "Cet enregistrement n'a pas pu être supprimer.");
         }
     }
 }
