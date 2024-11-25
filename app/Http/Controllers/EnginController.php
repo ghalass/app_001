@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class EnginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view engin', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create engin', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update engin', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete engin', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class LubrifiantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view lubrifiant', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create lubrifiant', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update lubrifiant', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete lubrifiant', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

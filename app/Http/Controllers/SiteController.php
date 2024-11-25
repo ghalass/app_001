@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view site', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create site', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update site', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete site', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

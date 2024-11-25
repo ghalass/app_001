@@ -100,7 +100,7 @@ class RoleController extends Controller
 
     function addPermissionToRole(string $roleId)
     {
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('name', 'desc')->get();
         $role = Role::findOrFail($roleId);
         $rolePermissions = DB::table('role_has_permissions')
             ->where('role_has_permissions.role_id', $roleId)

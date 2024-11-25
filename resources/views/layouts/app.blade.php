@@ -26,7 +26,7 @@
 
         @include('layouts.nav')
 
-        <main class="py-2">
+        <main class="container-fluid py-2">
             @include('common.alert')
             @yield('content')
         </main>

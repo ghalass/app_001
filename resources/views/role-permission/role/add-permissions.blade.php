@@ -24,22 +24,107 @@
 
                     <label for="">Permissions</label>
 
-                    <div class="row">
+                    <h6><span class="badge rounded-pill text-bg-info" style="width: 100px">Create</span></h6>
+                    <div class="d-flex flex-wrap gap-2">
                         @foreach ($permissions as $permission)
-                            <div class="col-md-2">
+                            @if (str_starts_with($permission->name, 'create'))
+                                <div class="gap-2">
+                                    <div class="form-check form-switch ">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="permission[]"
+                                            id="flexSwitchCheckChecked_{{ $permission->id }}"
+                                            value="{{ $permission->name }}"
+                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="flexSwitchCheckChecked_{{ $permission->id }}">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
 
-                                <div class="form-check form-switch d-flex gap-1">
-                                    <input class="form-check-input" type="checkbox" role="switch" name="permission[]"
-                                        id="flexSwitchCheckChecked_{{ $permission->id }}" value="{{ $permission->name }}"
-                                        {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
-                                    <label class="form-check-label" for="flexSwitchCheckChecked_{{ $permission->id }}">
-                                        {{ $permission->name }}
-                                    </label>
                                 </div>
-
-                            </div>
+                            @endif
                         @endforeach
                     </div>
+
+
+                    <h6><span class="badge rounded-pill text-bg-info" style="width: 100px">View</span></h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach ($permissions as $permission)
+                            @if (str_starts_with($permission->name, 'view'))
+                                <div class="gap-2">
+                                    <div class="form-check form-switch ">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="permission[]"
+                                            id="flexSwitchCheckChecked_{{ $permission->id }}"
+                                            value="{{ $permission->name }}"
+                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="flexSwitchCheckChecked_{{ $permission->id }}">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
+
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <h6><span class="badge rounded-pill text-bg-info" style="width: 100px">Update</span></h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach ($permissions as $permission)
+                            @if (str_starts_with($permission->name, 'update'))
+                                <div class="gap-2">
+                                    <div class="form-check form-switch ">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="permission[]"
+                                            id="flexSwitchCheckChecked_{{ $permission->id }}"
+                                            value="{{ $permission->name }}"
+                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="flexSwitchCheckChecked_{{ $permission->id }}">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
+
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <h6><span class="badge rounded-pill text-bg-info" style="width: 100px">Edit</span></h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach ($permissions as $permission)
+                            @if (str_starts_with($permission->name, 'edit'))
+                                <div class="gap-2">
+                                    <div class="form-check form-switch ">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="permission[]"
+                                            id="flexSwitchCheckChecked_{{ $permission->id }}"
+                                            value="{{ $permission->name }}"
+                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="flexSwitchCheckChecked_{{ $permission->id }}">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
+
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <h6><span class="badge rounded-pill text-bg-info" style="width: 100px">Delete</span></h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach ($permissions as $permission)
+                            @if (str_starts_with($permission->name, 'delete'))
+                                <div class="gap-2">
+                                    <div class="form-check form-switch ">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="permission[]"
+                                            id="flexSwitchCheckChecked_{{ $permission->id }}"
+                                            value="{{ $permission->name }}"
+                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="flexSwitchCheckChecked_{{ $permission->id }}">
+                                            {{ $permission->name }}
+                                        </label>
+                                    </div>
+
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+
                 </div>
 
 

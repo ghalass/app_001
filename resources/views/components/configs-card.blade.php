@@ -2,17 +2,24 @@
     <div class="card" style="width: 250px; height: 160px;">
         <div class="card-body">
             <div class="float-end">
+                {{-- @can('view site') --}}
                 <a class="btn btn-sm btn-outline-info" href={{ route($page . 's.show', [$page => $item]) }}>
                     <i class="bi bi-eye-fill"></i>
                 </a>
+                {{-- @endcan --}}
+
+                {{-- @can('edit site') --}}
                 <a class="btn btn-sm btn-outline-success" href={{ route($page . 's.edit', [$page => $item]) }}>
                     <i class="bi bi-pen"></i>
                 </a>
+                {{-- @endcan --}}
 
+                {{-- @can('delete site') --}}
                 <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
                     data-bs-target="{{ '#exampleModal' . $item->id }}">
                     <i class="bi bi-trash3"></i>
-                </button>
+                    {{-- </button> --}}
+                    {{-- @endcan --}}
             </div>
 
             <h5 class="card-title">

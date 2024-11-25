@@ -32,13 +32,13 @@
                                 </a>
 
 
-                                {{-- @can('update role') --}}
-                                @role('admin')
+                                @can('update role')
+                                    {{-- @role('admin') --}}
                                     <a href="{{ route('roles.edit', ['role' => $role]) }}" class="btn btn-sm btn-outline-success">
                                         Edit
                                     </a>
-                                @endrole
-                                {{-- @endcan --}}
+                                    {{-- @endrole --}}
+                                @endcan
 
                                 @can('delete role')
                                     <a href="{{ route('roles.delete', ['roleId' => $role->id]) }}"

@@ -12,6 +12,7 @@
             </h4>
         </div>
         <div class="card-body">
+            <div class="d-flex justify-content-center">{{ $permissions->onEachSide(1)->links() }}</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
@@ -26,7 +27,7 @@
                             <td>{{ $permission->id }}</td>
                             <td>{{ $permission->name }}</td>
                             <td>
-                                @can('update permission')
+                                @can('edit permission')
                                     <a href="{{ route('permissions.edit', ['permission' => $permission]) }}"
                                         class="btn btn-sm btn-outline-success">
                                         Edit

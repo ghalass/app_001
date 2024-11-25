@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class OrganeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view organe', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create organe', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update organe', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete organe', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

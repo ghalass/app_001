@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ParcController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view parc', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create parc', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update parc', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete parc', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

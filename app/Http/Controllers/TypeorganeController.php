@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class TypeorganeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view typeorgane', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create typeorgane', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update typeorgane', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete typeorgane', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

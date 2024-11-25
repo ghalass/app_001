@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class TypelubrifiantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view typelubrifiant', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create typelubrifiant', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update typelubrifiant', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete typelubrifiant', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class TypeparcController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view typeparc', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create typeparc', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update typeparc', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete typeparc', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
