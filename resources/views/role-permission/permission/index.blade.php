@@ -26,12 +26,17 @@
                             <td>{{ $permission->id }}</td>
                             <td>{{ $permission->name }}</td>
                             <td>
-                                <a href="{{ route('permissions.edit', ['permission' => $permission]) }}"
-                                    class="btn btn-sm btn-outline-success">
-                                    Edit
-                                </a>
-                                <a href="{{ route('permissions.delete', ['permissionId' => $permission->id]) }}"
-                                    class="btn btn-sm btn-outline-danger">Delete</a>
+                                @can('update permission')
+                                    <a href="{{ route('permissions.edit', ['permission' => $permission]) }}"
+                                        class="btn btn-sm btn-outline-success">
+                                        Edit
+                                    </a>
+                                @endcan
+
+                                @can('delete permission')
+                                    <a href="{{ route('permissions.delete', ['permissionId' => $permission->id]) }}"
+                                        class="btn btn-sm btn-outline-danger">Delete</a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

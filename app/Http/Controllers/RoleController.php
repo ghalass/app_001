@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view role', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create role', ['only' => ['create', 'store', 'addPermissionToRole', 'givePermissionToRole']]);
+        $this->middleware('permission:update role', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:delete role', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -81,9 +92,37 @@ class RoleController extends Controller
      */
     public function destroy(string $roleId)
     {
-        $role = Role::findById($roleId);
+        $role = Role::findOrFail($roleId);
         $role->delete();
         return redirect('roles')
             ->with('success', 'Role supprimée avec succès!');
+    }
+
+    function addPermissionToRole(string $roleId)
+    {
+        $permissions = Permission::all();
+        $role = Role::findOrFail($roleId);
+        $rolePermissions = DB::table('role_has_permissions')
+            ->where('role_has_permissions.role_id', $roleId)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+
+        $data = [
+            'role' => $role,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions
+        ];
+        return view('role-permission.role.add-permissions', $data);
+    }
+    function givePermissionToRole(Request $request, string $roleId)
+    {
+        $request->validate([
+            'permission' => 'required'
+        ]);
+        $role = Role::findOrFail($roleId);
+        $role->syncPermissions($request->permission);
+        return redirect()
+            ->back()
+            ->with('success', 'Permissions ajoutées aux roles avec succès!');
     }
 }

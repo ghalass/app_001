@@ -12,6 +12,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TypelubrifiantController;
 use App\Http\Controllers\TypeorganeController;
 use App\Http\Controllers\TypeparcController;
+use App\Http\Controllers\UserController;
 use App\Livewire\Counter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,10 +41,24 @@ Route::prefix('configs')->group(function () {
 
 Route::get('/counter', Counter::class);
 
-// Permissions
-Route::resource('permissions', PermissionController::class);
-Route::get('/permissions/{permissionId}/delete', [PermissionController::class, 'destroy'])->name('permissions.delete');
+//
+// Route::group(['middleware' => ['role:super-admin|admin']], function () {
+Route::group(['middleware' => ['isAdmin']], function () {
+    // Permissions
+    Route::resource('permissions', PermissionController::class);
+    Route::get('/permissions/{permissionId}/delete', [PermissionController::class, 'destroy'])->name('permissions.delete');
 
-// Roles
-Route::resource('roles', RoleController::class);
-Route::get('/roles/{roleId}/delete', [RoleController::class, 'destroy'])->name('roles.delete');
+    // Roles
+    Route::resource('roles', RoleController::class);
+    Route::get('/roles/{roleId}/delete', [RoleController::class, 'destroy'])
+        ->name('roles.delete');
+    // ->middleware('permission:delete role');
+
+    Route::get('/roles/{roleId}/add-permissions', [RoleController::class, 'addPermissionToRole'])->name('roles.add-permissions');
+    Route::put('/roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionToRole'])->name('roles.give-permissions');
+
+    // Users
+    Route::resource('users', UserController::class);
+    Route::get('/users/{userId}/delete', [UserController::class, 'destroy'])
+        ->name('users.delete');
+});

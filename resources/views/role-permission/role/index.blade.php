@@ -26,11 +26,24 @@
                             <td>{{ $role->id }}</td>
                             <td>{{ $role->name }}</td>
                             <td>
-                                <a href="{{ route('roles.edit', ['role' => $role]) }}" class="btn btn-sm btn-outline-success">
-                                    Edit
+                                <a href="{{ route('roles.add-permissions', ['roleId' => $role->id]) }}"
+                                    class="btn btn-sm btn-outline-success">
+                                    Add / Edit Role Permission
                                 </a>
-                                <a href="{{ route('roles.delete', ['roleId' => $role->id]) }}"
-                                    class="btn btn-sm btn-outline-danger">Delete</a>
+
+
+                                {{-- @can('update role') --}}
+                                @role('admin')
+                                    <a href="{{ route('roles.edit', ['role' => $role]) }}" class="btn btn-sm btn-outline-success">
+                                        Edit
+                                    </a>
+                                @endrole
+                                {{-- @endcan --}}
+
+                                @can('delete role')
+                                    <a href="{{ route('roles.delete', ['roleId' => $role->id]) }}"
+                                        class="btn btn-sm btn-outline-danger">Delete</a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
