@@ -12,7 +12,7 @@ class TypeparcController extends Controller
     {
         $this->middleware('permission:view typeparc', ['only' => ['index', 'show']]);
         $this->middleware('permission:create typeparc', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update typeparc', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit typeparc', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete typeparc', ['only' => ['destroy']]);
     }
     /**

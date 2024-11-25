@@ -12,7 +12,7 @@ class TypelubrifiantController extends Controller
     {
         $this->middleware('permission:view typelubrifiant', ['only' => ['index', 'show']]);
         $this->middleware('permission:create typelubrifiant', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update typelubrifiant', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit typelubrifiant', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete typelubrifiant', ['only' => ['destroy']]);
     }
     /**

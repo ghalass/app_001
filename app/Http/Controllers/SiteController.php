@@ -15,7 +15,7 @@ class SiteController extends Controller
     {
         $this->middleware('permission:view site', ['only' => ['index', 'show']]);
         $this->middleware('permission:create site', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update site', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit site', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete site', ['only' => ['destroy']]);
     }
 

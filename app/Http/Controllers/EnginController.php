@@ -15,7 +15,7 @@ class EnginController extends Controller
     {
         $this->middleware('permission:view engin', ['only' => ['index', 'show']]);
         $this->middleware('permission:create engin', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update engin', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit engin', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete engin', ['only' => ['destroy']]);
     }
     /**

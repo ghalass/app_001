@@ -32,12 +32,10 @@
                                 </a>
 
 
-                                @can('update role')
-                                    {{-- @role('admin') --}}
+                                @can('edit role')
                                     <a href="{{ route('roles.edit', ['role' => $role]) }}" class="btn btn-sm btn-outline-success">
                                         Edit
                                     </a>
-                                    {{-- @endrole --}}
                                 @endcan
 
                                 @can('delete role')

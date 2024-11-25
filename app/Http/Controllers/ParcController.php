@@ -13,7 +13,7 @@ class ParcController extends Controller
     {
         $this->middleware('permission:view parc', ['only' => ['index', 'show']]);
         $this->middleware('permission:create parc', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update parc', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit parc', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete parc', ['only' => ['destroy']]);
     }
     /**

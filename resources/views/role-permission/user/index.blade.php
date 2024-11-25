@@ -38,7 +38,7 @@
                                 @endif
                             </td>
                             <td>
-                                @can('delete user')
+                                @can('edit user')
                                     <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-sm btn-outline-success">
                                         Edit
                                     </a>

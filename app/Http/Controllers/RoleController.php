@@ -12,10 +12,10 @@ class RoleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view role', ['only' => ['index', 'show']]);
-        $this->middleware('permission:create role', ['only' => ['create', 'store', 'addPermissionToRole', 'givePermissionToRole']]);
-        $this->middleware('permission:update role', ['only' => ['update', 'edit']]);
-        $this->middleware('permission:delete role', ['only' => ['destroy']]);
+        // $this->middleware('permission:view role', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:create role', ['only' => ['create', 'store', 'addPermissionToRole', 'givePermissionToRole']]);
+        // $this->middleware('permission:edit role', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:delete role', ['only' => ['destroy']]);
     }
 
     /**
@@ -100,7 +100,7 @@ class RoleController extends Controller
 
     function addPermissionToRole(string $roleId)
     {
-        $permissions = Permission::orderBy('name', 'desc')->get();
+        $permissions = Permission::orderBy('name', 'asc')->get();
         $role = Role::findOrFail($roleId);
         $rolePermissions = DB::table('role_has_permissions')
             ->where('role_has_permissions.role_id', $roleId)

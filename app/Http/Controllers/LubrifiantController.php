@@ -13,7 +13,7 @@ class LubrifiantController extends Controller
     {
         $this->middleware('permission:view lubrifiant', ['only' => ['index', 'show']]);
         $this->middleware('permission:create lubrifiant', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update lubrifiant', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit lubrifiant', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete lubrifiant', ['only' => ['destroy']]);
     }
     /**

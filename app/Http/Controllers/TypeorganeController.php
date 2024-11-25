@@ -12,7 +12,7 @@ class TypeorganeController extends Controller
     {
         $this->middleware('permission:view typeorgane', ['only' => ['index', 'show']]);
         $this->middleware('permission:create typeorgane', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update typeorgane', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit typeorgane', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete typeorgane', ['only' => ['destroy']]);
     }
     /**

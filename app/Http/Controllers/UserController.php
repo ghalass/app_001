@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $this->middleware('permission:view user', ['only' => ['index', 'show']]);
         $this->middleware('permission:create user', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update user', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit user', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete user', ['only' => ['destroy']]);
     }
 

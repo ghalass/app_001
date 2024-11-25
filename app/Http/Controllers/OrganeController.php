@@ -13,7 +13,7 @@ class OrganeController extends Controller
     {
         $this->middleware('permission:view organe', ['only' => ['index', 'show']]);
         $this->middleware('permission:create organe', ['only' => ['create', 'store']]);
-        $this->middleware('permission:update organe', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:edit organe', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete organe', ['only' => ['destroy']]);
     }
     /**

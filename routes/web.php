@@ -24,12 +24,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 
+
+
+Route::get('/counter', Counter::class);
+
 // /configs
 Route::prefix('configs')->group(function () {
     Route::get('/', [ConfigController::class, 'index'])->name('configs');
 
     Route::resource('sites', SiteController::class);
-
     Route::resource('typeparcs', TypeparcController::class);
     Route::resource('parcs', ParcController::class);
     Route::resource('engins', EnginController::class);
@@ -38,8 +41,6 @@ Route::prefix('configs')->group(function () {
     Route::resource('typeorganes', TypeorganeController::class);
     Route::resource('organes', OrganeController::class);
 });
-
-Route::get('/counter', Counter::class);
 
 //
 // Route::group(['middleware' => ['role:super-admin|admin']], function () {
