@@ -36,11 +36,24 @@
     <script src="{{ asset('js/toastr.min.js') }}"></script>
 
 
+    {{-- Toastr Script for Livewire --}}
     <script>
         toastr.options = {
             "progressBar": true,
             "closeButton": true,
-        }
+        };
+        window.addEventListener('success', event => {
+            toastr.success(event.detail[0].message);
+        });
+        window.addEventListener('warning', event => {
+            toastr.warning(event.detail[0].message);
+        });
+        window.addEventListener('error', event => {
+            toastr.error(event.detail[0].message);
+        });
+        window.addEventListener('info', event => {
+            toastr.info(event.detail[0].message);
+        });
     </script>
 
 
@@ -67,6 +80,11 @@
             toastr.info("{{ session('info') }}");
         </script>
     @endif
+
+    {{-- Connect component file js --}}
+    @stack('scripts')
+
+    @livewireScripts
 
 </body>
 

@@ -1,3 +1,5 @@
+@props(['name', 'description', 'label', 'message', 'defaultValue'])
+
 <div class="form-floating mb-1">
     <input type="text" class="form-control @error("{{ $name }}") is-invalid @enderror"
         name="{{ $name }}" id="floating{{ ucfirst($name) }}" placeholder=""

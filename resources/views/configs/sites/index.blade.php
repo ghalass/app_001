@@ -6,6 +6,10 @@
     <x-configs-header page="sites" />
 
     <div class="mt-2">
+
+        <livewire:list-sites />
+
+        {{--
         <x-configs-sub-header page="sites" search="{{ $search }}" />
 
         <div class="d-flex justify-content-center">{{ $sites->onEachSide(1)->links() }}</div>
@@ -13,6 +17,6 @@
             @foreach ($sites as $item)
                 <x-configs-card :$item page="site" />
             @endforeach
-        </div>
+        </div> --}}
     </div>
 @endsection
