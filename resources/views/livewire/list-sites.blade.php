@@ -39,7 +39,21 @@
 
         </div>
         <div class="col-8">
-            <table class="table table-hover">
+            <p>{{$q}}</p>
+            <div class="row align-items-center mb-2">
+                <div class="col-auto">
+                    <input type="text" wire:model.live="q" class="form-control" placeholder="Search..."/>
+                </div>
+                <div class="col-auto">
+                    <select  wire:model.live='pagination' class="form-select">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+            <table class="table table-hover table-sm">
                 <thead>
                     <th>#</th>
                     <th>Site</th>
@@ -67,7 +81,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">{{ $sites->onEachSide(1)->links() }}</div>
+            <span>{{$sites->links()}}</span>
         </div>
     </div>
 </div>
