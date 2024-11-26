@@ -11,27 +11,28 @@
 
     <div class="row">
         <div class="col-4">
+            {{ $operation }}
             <form wire:submit.prevent="submit" class="form-floating mb-3">
                 <div class="form-floating mb-1">
-                    <input wire:model='name' type="text" class="form-control @error('name') is-invalid @enderror"
-                        id="floatingName" placeholder="">
+                    <input wire:model='form.name' type="text"
+                        class="form-control @error('form.name') is-invalid @enderror" id="floatingName" placeholder="">
                     <label for="floatingName">Site</label>
-                    @error('name')
+                    @error('form.name')
                         <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="form-floating mb-1">
-                    <textarea wire:model='description' id="description" style="height: 100px" placeholder=""
-                        class="form-control @error('description') is-invalid @enderror"></textarea>
+                    <textarea wire:model='form.description' id="description" style="height: 100px" placeholder=""
+                        class="form-control @error('form.description') is-invalid @enderror"></textarea>
                     <label for="description">Description</label>
-                    @error('description')
+                    @error('form.description')
                         <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <button type="submit" class="btn btn-sm btn-outline-secondary">
-                    Save
+                    Valider
                 </button>
 
             </form>
