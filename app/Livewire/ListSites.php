@@ -15,6 +15,14 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ListSites extends Component
 {
+
+    public $title = "Create Site";
+    public $event = "create-site";
+
+    public $title1 = "Create Site Vitals";
+    public $event1 = "create-site-vitals";
+
+
     public SiteForm $form;
     public $operation = 'add';
     public $search = '';

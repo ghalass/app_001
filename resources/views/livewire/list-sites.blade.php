@@ -57,13 +57,13 @@
             </div>
             <div class="row">
                 <div class="col-auto">
-                    <button wire:click='exportExcelQuery' class="btn btn-sm btn-outline-success">Excel Query</button>
+                    <button wire:click='exportExcelQuery' class="btn btn-sm btn-outline-primary">Excel Query</button>
                 </div>
                 <div class="col-auto">
                     <button wire:click='exportExcelView' class="btn btn-sm btn-outline-success">Excel View</button>
                 </div>
                 <div class="col-auto">
-                    <button wire:click='exportPdfView' class="btn btn-sm btn-secondary">View PDF</button>
+                    <button wire:click='exportPdfView' class="btn btn-sm btn-outline-secondary">View PDF</button>
                 </div>
             </div>
             <div class="row">
@@ -100,4 +100,20 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{ $event }}">
+        Create Site
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{ $event1 }}">
+        Site Vitals
+    </button>
+    <x-modal :modelTitle="$title" :eventName="$event">
+        <livewire:create-site />
+    </x-modal>
+
+    <x-modal :modelTitle="$title1" :eventName="$event1">
+        <livewire:create-site-vitals />
+    </x-modal>
 </div>
