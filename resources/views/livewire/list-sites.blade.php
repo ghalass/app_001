@@ -29,11 +29,12 @@
                         <p class="text-danger fst-italic fw-lighter">{{ $message }}</p>
                     @enderror
                 </div>
-                <button wire:loading.attr='disabled' type="submit" class="btn btn-sm btn-outline-secondary">
-                    <div wire:loading class="spinner-border spinner-border-sm"></div>
+                <button wire:target='submit' wire:loading.attr='disabled' type="submit"
+                    class="btn btn-sm btn-outline-secondary">
+                    <div wire:target='submit' wire:loading class="spinner-border spinner-border-sm"></div>
 
-                    <span wire:loading.remove>Valider</span>
-                    <span wire:loading>Saving ...</span>
+                    <span wire:target='submit' wire:loading.remove>Valider</span>
+                    <span wire:target='submit' wire:loading>Saving ...</span>
                 </button>
 
             </form>
@@ -56,13 +57,13 @@
             </div>
             <div class="row">
                 <div class="col-auto">
-                    <button wire:click='exportExcel' class="btn btn-sm btn-outline-success">Excel Query</button>
+                    <button wire:click='exportExcelQuery' class="btn btn-sm btn-outline-success">Excel Query</button>
                 </div>
                 <div class="col-auto">
-                    <button wire:click='exportExcel2' class="btn btn-sm btn-outline-success">Excel View</button>
+                    <button wire:click='exportExcelView' class="btn btn-sm btn-outline-success">Excel View</button>
                 </div>
                 <div class="col-auto">
-                    <button wire:click='viewPDF' class="btn btn-sm btn-secondary">View PDF</button>
+                    <button wire:click='exportPdfView' class="btn btn-sm btn-secondary">View PDF</button>
                 </div>
             </div>
             <div class="row">

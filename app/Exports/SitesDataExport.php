@@ -22,7 +22,7 @@ class SitesDataExport implements FromView, ShouldAutoSize
 
     public function view(): View
     {
-        return view('livewire.sites', [
+        return view('livewire.exports.excel.sites', [
             'sites' => $this->sites
         ]);
     }
