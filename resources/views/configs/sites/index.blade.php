@@ -7,7 +7,7 @@
 
     <div class="mt-2">
 
-        <livewire:list-sites />
+        <livewire:list-sites lazy />
 
         {{--
         <x-configs-sub-header page="sites" search="{{ $search }}" />

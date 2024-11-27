@@ -2,10 +2,16 @@
 
 namespace App\Livewire;
 
+use App\Exports\SitesDataExport;
+use App\Exports\SitesExport;
 use App\Livewire\Forms\SiteForm;
 use App\Models\Site;
+
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ListSites extends Component
 {
@@ -25,6 +31,8 @@ class ListSites extends Component
     }
     public function submit()
     {
+        sleep(2);
+
         switch ($this->operation) {
             case 'add':
                 $this->form->store();
@@ -52,6 +60,7 @@ class ListSites extends Component
 
     public function render()
     {
+        // sleep(1);
         // $sites = Site::paginate($this->pagination);
         if (!$this->q) {
             $sites = Site::paginate($this->pagination);
@@ -65,8 +74,32 @@ class ListSites extends Component
         ]);
     }
 
+
+    // Q in updatedQ for q variable of search
     public function updatedQ()
     {
         $this->resetPage();
+    }
+
+    public function exportExcel()
+    {
+        return (new SitesExport)->download('sites.xlsx');
+    }
+
+    public function exportExcel2()
+    {
+        return Excel::download(new SitesDataExport, 'sites-list.xlsx');
+    }
+
+    public function viewPDF()
+    {
+        $sites = Site::all();
+        // dd($sites);
+        $pdf = Pdf::loadView('pdf.sites', array('sites' => $sites))
+            ->setPaper('a4');
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'liste des sites.pdf');
     }
 }

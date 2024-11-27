@@ -19,13 +19,13 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet" type="text/css">
+    @livewireStyles
 </head>
 
 <body>
     <div id="app">
 
         @include('layouts.nav')
-
         <main class="container-fluid py-2">
             @include('common.alert')
             @yield('content')
