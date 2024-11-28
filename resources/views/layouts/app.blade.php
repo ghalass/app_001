@@ -19,6 +19,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet" type="text/css">
+
+    @stack('styles')
     @livewireStyles
 </head>
 

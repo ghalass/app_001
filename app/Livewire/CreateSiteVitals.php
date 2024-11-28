@@ -27,7 +27,7 @@ class CreateSiteVitals extends Component
         $this->reset();
         $this->resetValidation();
         //savaing of the site
-        $this->js("alert('Site vitals saved')");
+        // $this->js("alert('Site vitals saved')");
     }
 
     #[On('create-site-vitals-close')]
@@ -35,6 +35,6 @@ class CreateSiteVitals extends Component
     {
         $this->reset();
         $this->resetValidation();
-        $this->js("alert('Site vitals model closed')");
+        // $this->js("alert('Site vitals model closed')");
     }
 }

@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ListSites extends Component
 {
+    public $test = "ok";
 
     public $title = "Create Site";
     public $event = "create-site";
@@ -26,6 +27,61 @@ class ListSites extends Component
     public SiteForm $form;
     public $operation = 'add';
     public $search = '';
+
+
+    /** */
+    public $name;
+    public $description;
+
+    // input fields on update validation
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+            'name'          => 'required|unique:sites,name,',
+            'description'   => 'required'
+        ]);
+    }
+
+    public function storeSiteData()
+    {
+        // on form submit validation
+        // $this->validate([
+        //     'name'          => 'required|unique:sites,name,',
+        //     'description'   => 'required'
+        // ]);
+        // // Add Site Data
+        // $site = new Site();
+        // $site->name = $this->name;
+        // $site->description = $this->description;
+
+        // $site->save();
+
+        // for hide modal after add site success
+        $this->dispatch('close-modal');
+
+        // $this->dispatch('success', ['message' => 'Ajouté avec succès!']);
+    }
+
+    /** */
+
+    /***  */
+    // public $modal = false;
+
+    // function openModal() // abrirModal
+    // {
+    //     $this->modal = true;
+    // }
+    // function closeModal() //cerrarModal
+    // {
+    //     $this->modal = false;
+    // }
+    // function create()
+    // {
+    //     // $this->clearFields(); // limpiarCampos
+    //     $this->openModal(); // abrirModal
+    // }
+    /*** */
+
 
     public function edit(?Site $site)
     {
@@ -69,10 +125,11 @@ class ListSites extends Component
     {
         // $sites = Site::paginate($this->pagination);
         if (!$this->q) {
-            $sites = Site::paginate($this->pagination);
+            $sites = Site::orderBy('id', 'desc')->paginate($this->pagination);
         } else {
             $sites = Site::where('name', 'like', '%' . $this->q . '%')
                 ->orWhere('description', 'like', '%' . $this->q . '%')
+                ->orderBy('id', 'desc')
                 ->paginate($this->pagination);
         }
         return view('livewire.list-sites', [

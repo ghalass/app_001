@@ -26,7 +26,7 @@ class CreateSite extends Component
         $this->reset();
         $this->resetValidation();
         //savaing of the site
-        $this->js("alert('Site saved')");
+        // $this->js("alert('Site saved')");
     }
 
     #[On('create-site-close')]
@@ -34,6 +34,6 @@ class CreateSite extends Component
     {
         $this->reset();
         $this->resetValidation();
-        $this->js("alert('Site model closed')");
+        // $this->js("alert('Site model closed')");
     }
 }
