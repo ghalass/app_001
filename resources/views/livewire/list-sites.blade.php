@@ -1,4 +1,4 @@
-<div>
+<div class="container-fluid">
     <div>
         <h1 class="text-center">Liste des sites</h1>
         <div>
@@ -8,13 +8,7 @@
                 </div>
             @endif
         </div>
-
-        <div class="col">
-            <button class="btn btn-sm btn-outline-danger mb-1 float-end" data-bs-toggle="modal"
-                data-bs-target="#editSiteModal">Add</button>
-        </div>
     </div>
-
 
     {{-- <button wire:click='create()' class="btn btn-sm btn-outline-danger">open modal</button> --}}
     {{-- @if ($modal)
@@ -22,8 +16,8 @@
         @endif --}}
 
 
-    <div class="row">
-        <div class="col-md-4">
+    <div class="">
+        {{-- <div class="col-md-4">
             <form wire:submit="submit" class="form-floating mb-3">
                 <div class="form-floating mb-1">
                     <input wire:model='form.name' type="text"
@@ -52,50 +46,62 @@
                 </button>
 
             </form>
-        </div>
+        </div> --}}
 
-        <div class="col-md-8">
-            <div class="row align-items-center mb-2">
-                <div class="col-auto">
-                    <input type="text" wire:model.live="q" class="form-control form-control-sm"
-                        placeholder="Search..." />
-                </div>
-                <div class="col-auto">
-                    <select wire:model.live='pagination' class="form-select form-select-sm">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
+        {{-- <div class=""> --}}
+
+
+        <div class="d-flex justify-content-between mb-2 gap-1">
+            <div class="">
+                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addSiteModal"
+                    wire:click='resetInput()'>Add</button>
             </div>
-            <div class="row">
-                <div class="col-auto">
+
+            <div class="d-flex gap-1 float-end">
+                <div class="">
                     <button wire:click='exportExcelQuery' class="btn btn-sm btn-outline-primary">Excel Query</button>
                 </div>
-                <div class="col-auto">
+                <div class="">
                     <button wire:click='exportExcelView' class="btn btn-sm btn-outline-success">Excel View</button>
                 </div>
-                <div class="col-auto">
+                <div class="">
                     <button wire:click='exportPdfView' class="btn btn-sm btn-outline-secondary">View PDF</button>
                 </div>
-
             </div>
-            <div class="row">
-                <table class="table table-hover table-sm">
-                    <thead>
-                        <th>#</th>
-                        <th>Site</th>
-                        <th>Desc</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach ($sites as $site)
-                            <tr wire:key>
-                                <td>{{ $site->id }}</td>
-                                <td>{{ $site->name }}</td>
-                                <td>{{ $site->description }}</td>
-                                {{-- <td>
+
+        </div>
+
+
+        <div class="row align-items-center mb-2">
+            <div class="col-auto">
+                <input type="text" wire:model.live="q" class="form-control form-control-sm"
+                    placeholder="Search..." />
+            </div>
+            <div class="col-auto">
+                <select wire:model.live='pagination' class="form-select form-select-sm">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <th>#</th>
+                    <th>Site</th>
+                    <th>Desc</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach ($sites as $site)
+                        <tr wire:key>
+                            <td>{{ $site->id }}</td>
+                            <td>{{ $site->name }}</td>
+                            <td>{{ $site->description }}</td>
+                            {{-- <td>
                                 <button wire:click="edit({{ $site }})" class="btn btn-sm btn-outline-success">
                                     <i class="bi bi-pen"></i>
                                 </button>
@@ -109,29 +115,30 @@
 
                             </td> --}}
 
-                                <td>
-                                    <button class="btn btn-sm btn-outline-secondary">
-                                        View
-                                    </button>
+                            <td>
+                                <button class="btn btn-sm btn-outline-secondary"
+                                    wire:click='viewSiteDetails({{ $site->id }})'>
+                                    View
+                                </button>
 
-                                    <button class="btn btn-sm btn-outline-primary"
-                                        wire:click='editSite({{ $site->id }})'>
-                                        Edit
-                                    </button>
+                                <button class="btn btn-sm btn-outline-primary"
+                                    wire:click='editSite({{ $site->id }})'>
+                                    Edit
+                                </button>
 
-                                    <button class="btn btn-sm btn-outline-danger"
-                                        wire:click='deleteSite({{ $site->id }})'>
-                                        Delete
-                                    </button>
+                                <button class="btn btn-sm btn-outline-danger"
+                                    wire:click='deleteConfirmation({{ $site->id }})'>
+                                    Delete
+                                </button>
 
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <span>{{ $sites->links() }}</span>
-            </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <span>{{ $sites->links() }}</span>
         </div>
+        {{-- </div> --}}
     </div>
 
 
@@ -185,8 +192,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary"
-                            data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-sm btn-primary">Add Site</button>
                     </div>
                 </form>
@@ -231,9 +237,59 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-secondary"
                             data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-sm btn-primary">Add Site</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Edit Site</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div wire:ignore.self class="modal fade" id="deleteSiteModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="deleteSiteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteSiteModalLabel">Delete Site Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h6>Etes-vous sûr ? Vous souhaitez supprimer ce site ?</h6>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" wire:click='cancel()'
+                        data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                    <button type="submit" class="btn btn-sm btn-danger" wire:click='deleteSiteData()'>Oui!
+                        Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Modal -->
+    <div wire:ignore.self class="modal fade" id="viewSiteModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="viewSiteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="viewSiteModalLabel">Site informations</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click='closeViewSiteModal'></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Site:</th>
+                            <th>{{ $view_site_name }}</th>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <th>{{ $view_site_description }}</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -243,9 +299,18 @@
         <script>
             window.addEventListener('close-modal', event => {
                 $('#addSiteModal').modal('hide');
+                $('#editSiteModal').modal('hide');
+                $('#deleteSiteModal').modal('hide');
+                $('#viewSiteModal').modal('hide');
             });
             window.addEventListener('show-edit-site-modal', event => {
                 $('#editSiteModal').modal('show');
+            });
+            window.addEventListener('show-delete-confirmation-modal', event => {
+                $('#deleteSiteModal').modal('show');
+            });
+            window.addEventListener('show-view-site-modal', event => {
+                $('#viewSiteModal').modal('show');
             });
         </script>
     @endscript

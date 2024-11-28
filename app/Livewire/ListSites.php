@@ -36,11 +36,17 @@ class ListSites extends Component
     #[Validate('required', as: 'Description du site')]
     public $description;
     public $site_edit_id;
+    public $site_delete_id;
+
+    public $view_site_name, $view_site_description;
 
     // input fields on update validation
     // public function updated($fields)
     // {
-    //     $this->validateOnly($fields);
+    //     $this->validateOnly($fields, [
+    //         'name'          => 'required|unique:sites,name,' . $this->site_edit_id,
+    //         'description'   => 'required'
+    //     ]);
     // }
 
     public function storeSiteData()
@@ -61,11 +67,11 @@ class ListSites extends Component
         // for hide modal after add site success
         $this->dispatch('close-modal');
 
-        $this->resetInpust();
+        $this->resetInput();
 
         $this->dispatch('success', ['message' => 'Ajouté avec succès!']);
     }
-    function resetInpust()
+    function resetInput()
     {
         $this->name = '';
         $this->description = '';
@@ -80,27 +86,66 @@ class ListSites extends Component
 
         $this->dispatch('show-edit-site-modal');
     }
-    public function editSiteData()
+    function editSiteData()
     {
         // on form submit validation
         $this->validate([
-            'name'          => 'required|unique:sites,name,',
+            'name'          => 'required|unique:sites,name,' . $this->site_edit_id,
             'description'   => 'required'
         ]);
         // $this->validate();
 
         $site = Site::where('id', $this->site_edit_id)->first();
 
-        // for hide modal after add site success
+        $site->name = $this->name;
+        $site->description = $this->description;
+
+        $site->save();
+
+        // for hide modal after update site success
         $this->dispatch('close-modal');
 
-        $this->name = '';
-        $this->description = '';
+        $this->resetInput();
 
-        $this->dispatch('success', ['message' => 'Ajouté avec succès!']);
+        $this->dispatch('info', ['message' => 'Modifié avec succès!']);
     }
+    function deleteConfirmation($id)
+    {
+        $this->site_delete_id = $id;
+        $this->dispatch('show-delete-confirmation-modal');
+    }
+    function deleteSiteData()
+    {
+        $site = Site::where('id', $this->site_delete_id)->first();
+        $site->delete();
 
-    function deleteSite($id) {}
+        $this->site_delete_id = '';
+
+        // for hide modal after delete site success
+        $this->dispatch('close-modal');
+
+        $this->resetInput();
+
+        $this->dispatch('warning', ['message' => 'Supprimé avec succès!']);
+    }
+    function cancel()
+    {
+        $this->site_delete_id = '';
+    }
+    function viewSiteDetails($id)
+    {
+        $site = Site::where('id', $id)->first();
+
+        $this->view_site_name = $site->name;
+        $this->view_site_description = $site->description;
+
+        $this->dispatch('show-view-site-modal');
+    }
+    function closeViewSiteModal()
+    {
+        $this->view_site_name = '';
+        $this->view_site_description = '';
+    }
 
     /** */
 
@@ -121,7 +166,6 @@ class ListSites extends Component
     //     $this->openModal(); // abrirModal
     // }
     /*** */
-
 
     public function edit(?Site $site)
     {
