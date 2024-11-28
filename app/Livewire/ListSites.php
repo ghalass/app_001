@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Validate;
 
 class ListSites extends Component
 {
@@ -30,17 +31,17 @@ class ListSites extends Component
 
 
     /** */
+    #[Validate('required|unique:sites,name,', as: 'Nom du site')]
     public $name;
+    #[Validate('required', as: 'Description du site')]
     public $description;
+    public $site_edit_id;
 
     // input fields on update validation
-    public function updated($fields)
-    {
-        $this->validateOnly($fields, [
-            'name'          => 'required|unique:sites,name,',
-            'description'   => 'required'
-        ]);
-    }
+    // public function updated($fields)
+    // {
+    //     $this->validateOnly($fields);
+    // }
 
     public function storeSiteData()
     {
@@ -49,18 +50,57 @@ class ListSites extends Component
         //     'name'          => 'required|unique:sites,name,',
         //     'description'   => 'required'
         // ]);
-        // // Add Site Data
-        // $site = new Site();
-        // $site->name = $this->name;
-        // $site->description = $this->description;
+        $this->validate();
+        // Add Site Data
+        $site = new Site();
+        $site->name = $this->name;
+        $site->description = $this->description;
 
-        // $site->save();
+        $site->save();
 
         // for hide modal after add site success
         $this->dispatch('close-modal');
 
-        // $this->dispatch('success', ['message' => 'Ajouté avec succès!']);
+        $this->resetInpust();
+
+        $this->dispatch('success', ['message' => 'Ajouté avec succès!']);
     }
+    function resetInpust()
+    {
+        $this->name = '';
+        $this->description = '';
+    }
+    function editSite($id)
+    {
+        $site = Site::where('id', $id)->first();
+
+        $this->site_edit_id = $id;
+        $this->name = $site->name;
+        $this->description = $site->description;
+
+        $this->dispatch('show-edit-site-modal');
+    }
+    public function editSiteData()
+    {
+        // on form submit validation
+        $this->validate([
+            'name'          => 'required|unique:sites,name,',
+            'description'   => 'required'
+        ]);
+        // $this->validate();
+
+        $site = Site::where('id', $this->site_edit_id)->first();
+
+        // for hide modal after add site success
+        $this->dispatch('close-modal');
+
+        $this->name = '';
+        $this->description = '';
+
+        $this->dispatch('success', ['message' => 'Ajouté avec succès!']);
+    }
+
+    function deleteSite($id) {}
 
     /** */
 
