@@ -3,7 +3,7 @@
 <title>Types lubrifiant</title>
 
 @section('content')
-    <x-configs-header page="typelubrifiants" />
+    {{-- <x-configs-header page="typelubrifiants" /> --}}
 
     <div class="mt-2">
         <x-configs-sub-header page="typelubrifiants" search="{{ $search }}" />

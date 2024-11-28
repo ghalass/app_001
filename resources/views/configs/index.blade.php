@@ -3,7 +3,7 @@
 <title>Configs</title>
 
 @section('content')
-    <x-configs-header page="configs" />
+    {{-- <x-configs-header page="configs" /> --}}
 
     <div class="mt-4 text-center">
         <h1 class="mb-4">

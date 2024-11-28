@@ -75,9 +75,22 @@ class ListSites extends Component
     {
         $this->name = '';
         $this->description = '';
+        $this->site_edit_id = '';
+        $this->site_delete_id = '';
+
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
+    function addSite()
+    {
+        $this->resetInput();
+        $this->dispatch('show-add-site-modal');
     }
     function editSite($id)
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
+
         $site = Site::where('id', $id)->first();
 
         $this->site_edit_id = $id;
@@ -119,8 +132,6 @@ class ListSites extends Component
         $site = Site::where('id', $this->site_delete_id)->first();
         $site->delete();
 
-        $this->site_delete_id = '';
-
         // for hide modal after delete site success
         $this->dispatch('close-modal');
 
@@ -130,7 +141,7 @@ class ListSites extends Component
     }
     function cancel()
     {
-        $this->site_delete_id = '';
+        $this->resetInput();
     }
     function viewSiteDetails($id)
     {
@@ -207,6 +218,7 @@ class ListSites extends Component
 
     public function render()
     {
+        sleep(1);
         // $sites = Site::paginate($this->pagination);
         if (!$this->q) {
             $sites = Site::orderBy('id', 'desc')->paginate($this->pagination);

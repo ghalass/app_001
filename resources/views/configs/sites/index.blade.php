@@ -3,9 +3,10 @@
 <title>Sites</title>
 
 @section('content')
-    <x-configs-header page="sites" />
+    {{-- <x-configs-header page="sites" /> --}}
 
     <div class="mt-2">
+
 
         <livewire:list-sites lazy />
 

@@ -3,7 +3,7 @@
 <title>Parcs</title>
 
 @section('content')
-    <x-configs-header page="parcs" />
+    {{-- <x-configs-header page="parcs" /> --}}
 
     <div class="mt-2">
         <x-configs-sub-header page="parcs" search="{{ $search }}" />

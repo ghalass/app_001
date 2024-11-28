@@ -58,7 +58,7 @@ $items = [
 ];
 ?>
 
-<div class="">
+{{-- <div class="">
     <ul class="nav nav-tabs justify-content-center">
         @foreach ($items as $item)
             <li class="nav-item">
@@ -69,4 +69,17 @@ $items = [
             </li>
         @endforeach
     </ul>
-</div>
+</div> --}}
+
+<ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+    @foreach ($items as $item)
+        <li class="w-100">
+            <a href="{{ route($item->link) }}" wire: class="nav-link px-0">
+                <span class="d-none d-sm-inline">
+                    <i class="{{ $item->icon }}"></i>
+                    {{ $item->title }}
+                </span>
+            </a>
+        </li>
+    @endforeach
+</ul>
