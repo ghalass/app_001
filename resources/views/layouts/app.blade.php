@@ -1,137 +1,119 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AdminLTE 3 | Dashboard 2</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome-free/css/all.min.css') }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.dataTables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/icheck-bootstrap.min.css') }}">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+
+    <!-- Custom style -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet" type="text/css">
 
+
+
     @stack('styles')
     @livewireStyles
 </head>
 
-<body>
-    <div id="app">
+<body class="hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed  text-sm">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-light navbar-collapse-hide-child">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a wire:navigate href="{{ url('/') }}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a wire:navigate href="{{ url('/configs') }}" class="nav-link">Configs</a>
+                </li>
+            </ul>
+        </nav>
 
-        @include('layouts.nav')
-        <main class="container-fluid py-2">
-            {{-- @include('common.alert') --}}
-
-            <div class="container-fluid">
-                <div class="row flex-nowrap">
-                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light border-end">
-                        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white ">
-                            <a href="/"
-                                class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                                <span class="fs-5 d-none d-sm-inline">Menu</span>
-                            </a>
-                            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                                id="menu">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link align-middle px-0 ">
-                                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">
-                                            Configs
-                                            <i class="bi bi-caret-left me-3"></i>
-                                        </span>
-                                    </a>
-                                    {{-- <ul class="collapse show nav flex-column ms-1" id="submenu1"
-                                        data-bs-parent="#menu">
-                                        <li class="w-100">
-                                            <a href="{{ route('sites.index') }}" wire:navigate wire:
-                                                class="nav-link px-0">
-                                                <span class="d-none d-sm-inline">Sites</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('typeparcs.index') }}" wire:navigate wire:
-                                                class="nav-link px-0">
-                                                <span class="d-none d-sm-inline">type parcs</span>
-                                            </a>
-                                        </li>
-                                    </ul> --}}
-                                    <x-configs-header page="sites" />
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-table"></i> <span
-                                            class="ms-1 d-none d-sm-inline">Orders</span></a>
-                                </li>
-
-                                <li>
-                                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-grid"></i> <span
-                                            class="ms-1 d-none d-sm-inline">Products</span> </a>
-                                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                        <li class="w-100">
-                                            <a href="#" class="nav-link px-0"> <span
-                                                    class="d-none d-sm-inline">Product</span>
-                                                1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="nav-link px-0"> <span
-                                                    class="d-none d-sm-inline">Product</span>
-                                                2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="nav-link px-0"> <span
-                                                    class="d-none d-sm-inline">Product</span>
-                                                3</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="nav-link px-0"> <span
-                                                    class="d-none d-sm-inline">Product</span>
-                                                4</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-people"></i> <span
-                                            class="ms-1 d-none d-sm-inline">Customers</span>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="col py-3">
+        @include('layouts.sibebar')
 
 
-                        {{-- CONTENT --}}
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
 
-                        @yield('content')
-
+                        @yield('header')
 
                     </div>
                 </div>
             </div>
 
 
-        </main>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+
+                    @yield('content')
+
+                </div>
+            </section>
+        </div>
+
+
+        @include('layouts.footer')
+
+
     </div>
+    <!-- ./wrapper -->
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <!-- REQUIRED SCRIPTS -->
+    <script type="text/javascript" src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('js/dataTables.js') }}"></script>
+    <script src="{{ asset('js/dataTables.buttons.js') }}"></script>
+    <script src="{{ asset('js/buttons.dataTables.js') }}"></script>
+    <script src="{{ asset('js/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
+    <script src="{{ asset('js/xlsx.full.min.js') }}"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/chartjs-plugin-datalabels.min.js') }}"></script>
+
+    <script>
+        // bootsrap Custom File Input initialization
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 
     {{-- Toastr Script for Livewire --}}
     <script>
@@ -153,35 +135,31 @@
         });
     </script>
 
-
-    @if (Session::has('success'))
-        <script>
-            toastr.success("{{ session('success') }}");
-        </script>
-    @endif
-
-    @if (Session::has('error'))
-        <script>
-            toastr.error("{{ session('error') }}");
-        </script>
-    @endif
-
-    @if (Session::has('warning'))
-        <script>
-            toastr.warning("{{ session('warning') }}");
-        </script>
-    @endif
-
-    @if (Session::has('info'))
-        <script>
-            toastr.info("{{ session('info') }}");
-        </script>
-    @endif
+    <script>
+        // toastr notification initialization
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
 
     {{-- Connect component file js --}}
     @stack('scripts')
 
     @livewireScripts
+
 </body>
 
 </html>

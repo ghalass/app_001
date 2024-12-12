@@ -32,7 +32,8 @@ Route::get('/counter', Counter::class);
 Route::prefix('configs')->group(function () {
     Route::get('/', [ConfigController::class, 'index'])->name('configs');
 
-    Route::resource('sites', SiteController::class);
+    // Route::resource('sites', SiteController::class);
+    Route::get('sites', [ConfigController::class, 'sites'])->name('sites');
     Route::resource('typeparcs', TypeparcController::class);
     Route::resource('parcs', ParcController::class);
     Route::resource('engins', EnginController::class);

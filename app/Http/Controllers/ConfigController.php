@@ -33,4 +33,10 @@ class ConfigController extends Controller
 
         return view('configs.index', $data);
     }
+
+    function sites(): View
+    {
+        $data = [];
+        return view('configs.sites', $data);
+    }
 }
